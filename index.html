@@ -150,18 +150,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
 .cdval{font-size:17px}
 }
 
-.loading-overlay{display:none;position:fixed;inset:0;background:rgba(14,19,32,0.7);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:16px}
-.loading-overlay.show{display:flex}
-.loading-ring{width:48px;height:48px;border:3px solid rgba(255,255,255,0.2);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite}
-.loading-msg{font-size:14px;color:white;letter-spacing:0.04em}
+.lov{display:none;position:fixed;inset:0;background:rgba(14,19,32,0.75);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.lov.on{display:flex}
+.lring{width:48px;height:48px;border:3px solid rgba(255,255,255,0.2);border-top-color:#00e5a0;border-radius:50%;animation:spin .8s linear infinite}
+.lmsg{font-size:14px;color:white;letter-spacing:0.04em;max-width:260px;text-align:center}
 </style>
 </head>
 <body>
 
-<div class="loading-overlay" id="loverlay">
-  <div class="loading-ring"></div>
-  <div class="loading-msg" id="lmsg">Vahvistetaan sopimusta...</div>
-</div>
+<div class="lov" id="lov"><div class="lring"></div><div class="lmsg" id="lmsg">Vahvistetaan...</div></div>
 <div id="sl" class="state active"><div class="spinner"></div><p>Ladataan tarjousta...</p></div>
 <div id="se" class="state"><h2>Tarjousta ei löydy.</h2><p>Linkki on vanhentunut tai virheellinen. Ota yhteyttä Leadnordiin.</p></div>
 
@@ -169,11 +166,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
 <div class="wrap">
   <div class="topbar">
     <div class="logo"><span class="logo-arrow">↗</span>Leadnord<span class="logo-tag">/ tarjous</span></div>
-    <div class="vbadge"><div class="vdot"></div>Voimassa <strong id="vuntil">—</strong> asti</div>
+    <div class="vbadge"><div class="vdot"></div>Voimassa&#160;<strong id="vuntil">—</strong>&#160;asti</div>
   </div>
   <div class="cbar">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-    <p>Tämä tarjous on laadittu henkilökohtaisesti sinulle — se ei ole julkinen eikä näy hakukoneissa. Älä jaa linkkiä eteenpäin.</p>
+    <p>Tämä tarjous on laadittu henkilökohtaisesti sinulle — se ei ole julkinen eikä näy hakukoneissa.</p>
   </div>
   <div class="cdbar">
     <div class="cdlabel">Tarjous voimassa vielä</div>
@@ -263,7 +260,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
   <div class="card">
     <div class="cardpad">
       <p class="slabel">Hyväksy tarjous</p>
-      <p style="font-size:13px;color:var(--g600);margin-bottom:20px;line-height:1.6;">Olet yhden klikkauksen päässä. Hyväksymällä siirryt laskutustietojen täyttämiseen ja onboarding-ajan varaamiseen.</p>
+      <p style="font-size:13px;color:var(--g600);margin-bottom:20px;line-height:1.6;">Olet yhden klikkauksen päässä. Hyväksymällä siirryt laskutustietojen täyttämiseen ja onboarding-ajan varaamiseen. Sopimuspdf lähetetään sähköpostiisi.</p>
+      <div style="margin-bottom:20px;">
+        <label class="flabel" style="display:block;margin-bottom:6px;">Sähköposti sopimusvahvistusta varten *</label>
+        <input class="finput" type="email" id="cemail" placeholder="nimi@yritys.fi" style="max-width:380px;width:100%;">
+        <div style="font-size:11px;color:var(--g400);margin-top:4px;">Sopimusvahvistus lähetetään tähän osoitteeseen heti hyväksynnän jälkeen.</div>
+      </div>
       <div class="arow">
         <div class="aterms"><p>Hyväksymällä sitoudut <a onclick="document.getElementById('terms-modal').classList.add('open')">palveluehtojemme</a> mukaiseen 3 kuukauden sopimukseen.</p></div>
         <div class="abtns">
@@ -275,7 +277,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
   </div>
   <div class="cfooter">
     <div><strong>Sentralia Oy</strong> — Y-tunnus 3570381-4</div>
-    <div>Kappelikuja 6, 02200 Espoo · <a href="mailto:info@leadnord.com" class="hcontact-email">info@leadnord.com</a></div>
+    <div>Kappelikuja 6, 02200 Espoo · <a href="mailto:info@leadnord.com">info@leadnord.com</a></div>
     <div>Viite: <span id="oref">—</span></div>
   </div>
 </div>
@@ -317,9 +319,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
           </select>
         </div>
         <div class="fgroup" id="bovtg" style="display:none;flex-direction:column;gap:5px;">
-          <label class="flabel">Verkkolaskuosoite (OVT-tunnus) *</label>
+          <label class="flabel">Verkkolaskuosoite (OVT) *</label>
           <input class="finput" type="text" id="bovt" placeholder="003712345678">
-          <span class="fhint">OVT-tunnus: 0037 + Y-tunnus ilman väliviivaa (esim. 003712345678)</span>
+          <span class="fhint">0037 + Y-tunnus ilman väliviivaa (esim. 003712345678)</span>
         </div>
         <div class="fgroup" id="bopg" style="display:none;flex-direction:column;gap:5px;">
           <label class="flabel">Verkkolaskuoperaattori *</label>
@@ -333,9 +335,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
             <option value="Procountor (003729434997)">Procountor (003729434997)</option>
             <option value="Visma (003726044706)">Visma (003726044706)</option>
             <option value="OpusCapita (E204503)">OpusCapita (E204503)</option>
-            <option value="Muu">Muu (kirjoita alla)</option>
+            <option value="Muu">Muu</option>
           </select>
-          <span class="fhint">Välittäjätunnus löytyy kirjanpito-ohjelmastanne</span>
         </div>
         <div class="fgroup"><label class="flabel">Viite / ostotilausnumero</label><input class="finput" type="text" id="bref" placeholder="Vapaaehtoinen"></div>
       </div>
@@ -359,14 +360,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
     <div class="cardpad">
       <p class="slabel">Varaa onboarding-aika</p>
       <p style="font-size:13px;color:var(--g400);margin-bottom:16px;line-height:1.6;">60 min aloituspuhelu — ICP, viestit ja tavoitteet yhdessä. Varaa aika suoraan kalenterista.</p>
-      <div style="border-radius:6px;overflow:hidden;">
-        <iframe src="https://calendly.com/leadnord-meeting/onboarding?embed_domain=go.leadnord.com&embed_type=Inline&hide_gdpr_banner=1" width="100%" height="900" frameborder="0" scrolling="yes" style="display:block;min-width:320px;border:none;"></iframe>
+      <div style="border-radius:6px;overflow:hidden;border:1px solid var(--g200);">
+        <iframe src="https://calendly.com/leadnord-meeting/onboarding?embed_domain=go.leadnord.com&embed_type=Inline" width="100%" height="900" frameborder="0" scrolling="yes" style="display:block;min-width:320px;border:none;"></iframe>
       </div>
     </div>
   </div>
   <div class="cfooter">
     <div><strong>Sentralia Oy</strong> — Y-tunnus 3570381-4</div>
-    <div>Kappelikuja 6, 02200 Espoo · <a href="mailto:info@leadnord.com" class="hcontact-email">info@leadnord.com</a></div>
+    <div>Kappelikuja 6, 02200 Espoo · <a href="mailto:info@leadnord.com">info@leadnord.com</a></div>
   </div>
 </div>
 </div>
@@ -385,7 +386,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 var SB='https://mqmxmdiecibtvglidsvp.supabase.co';
 var AK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbXhtZGllY2lidHZnbGlkc3ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2MDE5MzYsImV4cCI6MjA5MDE3NzkzNn0.AZPgdnCnE_AxUNvk1dkSYQ4O6KO01_imfUvLB58KctA';
 var VAT=0.255;
@@ -395,6 +396,15 @@ function st(id){['sl','se','so','ss'].forEach(function(s){var el=document.getEle
 function fmt(n){return Math.round(n).toLocaleString('fi-FI')+'€';}
 function sb(path,opts){opts=opts||{};return fetch(SB+path,Object.assign({},opts,{headers:Object.assign({'apikey':AK,'Authorization':'Bearer '+AK,'Content-Type':'application/json'},opts.headers||{})})).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);if(r.status===204)return null;return r.json();});}
 function log(id,ev){sb('/rest/v1/offer_events',{method:'POST',body:JSON.stringify({offer_id:id,event:ev})}).catch(function(){});}
+
+function showLoading(msgs){
+  var ov=document.getElementById('lov');
+  var lm=document.getElementById('lmsg');
+  ov.classList.add('on');
+  var mi=0;lm.textContent=msgs[0];
+  var mt=setInterval(function(){mi++;if(mi<msgs.length)lm.textContent=msgs[mi];},900);
+  return {stop:function(){clearInterval(mt);ov.classList.remove('on');}};
+}
 
 function countdown(exp){
   var el=document.getElementById('cd');
@@ -418,26 +428,31 @@ function submitBilling(){
   var m=document.getElementById('bm').value;
   if(!c||!con||!b||!e||!m){alert('Täytä pakolliset kentät (yritys, yhteyshenkilö, Y-tunnus, sähköposti, laskutustapa).');return;}
   if(m==='einvoice'){
-    var ovt=document.getElementById('bovt').value.trim();
-    var op=document.getElementById('bop').value;
-    if(!ovt||!op){alert('Täytä verkkolaskuosoite (OVT) ja operaattori.');return;}
+    if(!document.getElementById('bovt').value.trim()||!document.getElementById('bop').value){
+      alert('Täytä verkkolaskuosoite (OVT) ja operaattori.');return;
+    }
   }
   var btn=document.getElementById('btn-billing');
   btn.disabled=true;
-  var ov=document.getElementById('loverlay');
-  var lm=document.getElementById('lmsg');
-  ov.classList.add('show');
-  var msgs=['Lähetetään laskutustietoja...','Välitetään tiimillemme...','Varmistetaan tiedot...'];
-  var mi=0;lm.textContent=msgs[0];
-  var mt=setInterval(function(){mi++;if(mi<msgs.length)lm.textContent=msgs[mi];},800);
-  var ovtVal=document.getElementById('bovt').value.trim();
-  var opVal=m==='einvoice'?(document.getElementById('bop').value+' / '+ovtVal):'';
-  var pl={offer_id:offer?offer.id.slice(0,8).toUpperCase():'-',contact:offer?offer.contact:'-',company:offer?offer.company:'-',billing_company:c,billing_contact:con,billing_business_id:b,billing_email:e,billing_address:document.getElementById('ba').value.trim(),payment_method:m,billing_ovt:m==='einvoice'?opVal:'',billing_reference:document.getElementById('bref').value.trim()};
-  sb('/rest/v1/offers?id=eq.'+(offer?offer.id:'x'),{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({payment_method:m,billing_company:c,billing_contact:con,billing_business_id:b,billing_email:e,billing_address:pl.billing_address,billing_reference:pl.billing_reference})}).then(function(){
-    return fetch('https://mqmxmdiecibtvglidsvp.supabase.co/functions/v1/send-billing-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(pl)});
+  var loader=showLoading(['Lähetetään laskutustietoja...','Välitetään tiimillemme...','Varmistetaan tiedot...']);
+  var ovtStr=m==='einvoice'?(document.getElementById('bop').value+' / '+document.getElementById('bovt').value.trim()):'';
+  var pl={
+    offer_id:offer?offer.id.slice(0,8).toUpperCase():'-',
+    contact:offer?offer.contact:'-',
+    company:offer?offer.company:'-',
+    billing_company:c,billing_contact:con,billing_business_id:b,billing_email:e,
+    billing_address:document.getElementById('ba').value.trim(),
+    payment_method:m,billing_ovt:ovtStr,
+    billing_reference:document.getElementById('bref').value.trim()
+  };
+  sb('/rest/v1/offers?id=eq.'+(offer?offer.id:'x'),{
+    method:'PATCH',headers:{'Prefer':'return=minimal'},
+    body:JSON.stringify({payment_method:m,billing_company:c,billing_contact:con,billing_business_id:b,billing_email:e,billing_address:pl.billing_address,billing_reference:pl.billing_reference})
   }).then(function(){
-    setTimeout(function(){clearInterval(mt);ov.classList.remove('show');document.getElementById('bcard').style.display='none';document.getElementById('bdone').style.display='block';},2400);
-  }).catch(function(){clearInterval(mt);ov.classList.remove('show');btn.disabled=false;alert('Virhe. Ota yhteyttä info@leadnord.com');});
+    return fetch(SB+'/functions/v1/send-billing-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(pl)});
+  }).then(function(){
+    setTimeout(function(){loader.stop();document.getElementById('bcard').style.display='none';document.getElementById('bdone').style.display='block';},2400);
+  }).catch(function(){loader.stop();btn.disabled=false;alert('Virhe. Ota yhteyttä info@leadnord.com');});
 }
 
 document.addEventListener('DOMContentLoaded',function(){
@@ -461,5 +476,36 @@ document.addEventListener('DOMContentLoaded',function(){
     var sl=document.getElementById('mslider');
     function calc(){var m=parseInt(sl.value);document.getElementById('mval').textContent=m;var mc=m*pm;var base=Math.max(mc,mn);document.getElementById('rmeet').textContent=fmt(mc);document.getElementById('rmin').textContent=fmt(mn);document.getElementById('rtot').textContent=fmt(base*(1+VAT));document.getElementById('rtot').style.color=mc<mn?'var(--g400)':'var(--blue)';}
     sl.addEventListener('input',calc);calc();
-    document.getElementById('btn-ask').addEventListener('click',function(){window.location.href='mailto:info@leadnord.com?subject=Kysymys tarjouksesta '+o.id.slice(0,8).toUpperCase()+'&body=Hei,%0A%0AMinulla on kysymys tarjouksestanne.%0A%0ATerveisin,%0A'+o.contact;});
-    
+    document.getElementById('btn-ask').addEventListener('click',function(){
+      window.location.href='mailto:info@leadnord.com?subject=Kysymys tarjouksesta '+o.id.slice(0,8).toUpperCase()+'&body=Hei,%0A%0AMinulla on kysymys tarjouksestanne.%0A%0ATerveisin,%0A'+o.contact;
+    });
+    document.getElementById('btn-accept').addEventListener('click',function(){
+      var cemail=document.getElementById('cemail').value.trim();
+      if(!cemail||!cemail.includes('@')){alert('Syötä sähköpostiosoitteesi sopimusvahvistusta varten.');document.getElementById('cemail').focus();return;}
+      var btn=this;btn.disabled=true;btn.textContent='Hyväksytään...';
+      var now=new Date().toISOString();
+      var loader=showLoading(['Vahvistetaan sopimusta...','Rekisteröidään tilaus...','Lähetetään sopimus sähköpostiisi...']);
+      sb('/rest/v1/offers?id=eq.'+o.id,{
+        method:'PATCH',headers:{'Prefer':'return=minimal'},
+        body:JSON.stringify({status:'accepted',contact_email:cemail})
+      }).then(function(){
+        log(o.id,'accepted');
+        return fetch(SB+'/functions/v1/send-contract',{
+          method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            contact:o.contact,company:o.company,contact_email:cemail,
+            offer_id:o.id.slice(0,8).toUpperCase(),
+            setup_fee:o.setup_fee||1490,per_meeting_fee:o.per_meeting_fee||249,
+            monthly_minimum:o.monthly_minimum||1490,accepted_at:now
+          })
+        });
+      }).then(function(){
+        setTimeout(function(){loader.stop();st('ss');window.scrollTo(0,0);},1200);
+      }).catch(function(){loader.stop();btn.disabled=false;btn.textContent='Hyväksy tarjous →';alert('Virhe. Yritä uudelleen tai ota yhteyttä info@leadnord.com');});
+    });
+    countdown(exp);st('so');log(o.id,'opened');
+  }).catch(function(e){console.error(e);st('se');});
+});
+</script>
+</body>
+</html>
