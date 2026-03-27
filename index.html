@@ -58,6 +58,7 @@
   .hero-contact-name { font-size: 14px; font-weight: 500; color: var(--navy); }
   .hero-contact-tagline { font-size: 12px; color: var(--gray-400); margin-top: 6px; line-height: 1.5; max-width: 160px; font-style: italic; }
   .hero-contact-email { display: block; font-size: 12px; color: var(--blue); margin-top: 8px; text-decoration: none; }
+  .hero-contact-email:hover { text-decoration: underline; }
 
   /* CARD BASE */
   .card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
@@ -177,9 +178,11 @@
     .page-wrap { padding: 12px 10px 48px; }
     .topbar { padding: 12px 16px; }
     .hero-card { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
-    .hero-contact { display: flex; align-items: center; gap: 14px; text-align: left; }
-    .hero-contact img { width: 64px; height: 64px; margin: 0; }
-    .hero-contact-tagline { max-width: none; font-size: 11px; }
+    .hero-contact { display: grid; grid-template-columns: auto 1fr; gap: 12px 16px; align-items: start; text-align: left; }
+    .hero-contact img { width: 64px; height: 64px; margin: 0; grid-row: 1 / 4; }
+    .hero-contact-role { margin-bottom: 0; }
+    .hero-contact-tagline { max-width: none; font-size: 11px; grid-column: 2; }
+    .hero-contact-email { grid-column: 2; }
     .hero h1 { font-size: 28px; }
     .hero-sub { font-size: 14px; }
     .card-pad { padding: 20px 16px; }
@@ -385,79 +388,101 @@
 
 <div id="state-success" class="state" style="display:none;min-height:unset;align-items:unset;padding:0;">
 <div class="page-wrap">
+
   <div class="topbar" style="position:relative;margin-bottom:12px;">
     <div class="logo"><span class="logo-arrow">↗</span>Leadnord<span class="logo-tag">/ tarjous hyväksytty</span></div>
   </div>
-  <div class="card" style="margin-bottom:12px;">
-    <div class="card-pad" style="display:flex;align-items:center;gap:16px;">
-      <div style="width:44px;height:44px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b37e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      </div>
+
+  <!-- THANK YOU HERO -->
+  <div class="card" style="margin-bottom:12px;overflow:hidden;">
+    <div style="background:var(--navy);padding:32px 40px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;">
       <div>
-        <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:2px;">Tarjous hyväksytty — kiitos!</div>
-        <div style="font-size:13px;color:var(--gray-400);">Täytä laskutustiedot alla ja varaa onboarding-aika. Lähetämme laskun 24h sisällä.</div>
+        <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;">Yhteistyö alkaa</div>
+        <h2 style="font-family:'DM Serif Display',serif;font-size:clamp(24px,4vw,36px);color:white;line-height:1.1;letter-spacing:-0.02em;margin:0 0 12px;">Mahtavaa — kiitämme<br>luottamuksesta!</h2>
+        <p style="font-size:14px;color:rgba(255,255,255,0.55);margin:0;line-height:1.6;">Lähetämme laskun 24 tunnin sisällä. Täytä laskutustiedot alla ja varaa onboarding-aika — pääsemme rakentamaan kasvua yhdessä.</p>
+      </div>
+      <div style="width:52px;height:52px;border-radius:50%;background:rgba(0,229,160,0.15);border:1px solid rgba(0,229,160,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00e5a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </div>
     </div>
   </div>
-  <div class="card" style="margin-bottom:12px;">
+
+  <!-- BILLING FORM -->
+  <div class="card" id="billing-card" style="margin-bottom:12px;">
     <div class="card-pad">
       <p class="section-label">Laskutustiedot</p>
+      <p style="font-size:13px;color:var(--gray-400);margin-bottom:24px;line-height:1.6;">Täytä laskutustiedot niin voimme lähettää laskun. Tiedot välitetään automaattisesti tiimillemme.</p>
       <div class="form-grid">
         <div class="form-group form-full">
           <label class="form-label">Yrityksen virallinen nimi *</label>
-          <input class="form-input" type="text" id="f-company" placeholder="Yritys Oy">
+          <input class="form-input" type="text" id="b-company" placeholder="Yritys Oy">
         </div>
         <div class="form-group">
           <label class="form-label">Y-tunnus *</label>
-          <input class="form-input" type="text" id="f-bid" placeholder="1234567-8">
+          <input class="form-input" type="text" id="b-bid" placeholder="1234567-8">
         </div>
         <div class="form-group">
           <label class="form-label">Laskutussähköposti *</label>
-          <input class="form-input" type="email" id="f-email" placeholder="laskut@yritys.fi">
+          <input class="form-input" type="email" id="b-email" placeholder="laskut@yritys.fi">
         </div>
         <div class="form-group form-full">
           <label class="form-label">Laskutusosoite</label>
-          <input class="form-input" type="text" id="f-address" placeholder="Katuosoite, postinumero, kaupunki">
+          <input class="form-input" type="text" id="b-address" placeholder="Katuosoite, postinumero, kaupunki">
         </div>
         <div class="form-group">
           <label class="form-label">Laskutustapa *</label>
-          <select class="form-select" id="f-method">
+          <select class="form-select" id="b-method" onchange="document.getElementById('b-ovt-group').style.display=this.value==='einvoice'?'flex':'none'">
             <option value="">Valitse...</option>
             <option value="email">Sähköpostilasku (PDF)</option>
             <option value="einvoice">Verkkolasku (e-lasku)</option>
           </select>
         </div>
-        <div class="form-group" id="einvoice-group" style="display:none">
+        <div class="form-group" id="b-ovt-group" style="display:none;">
           <label class="form-label">Verkkolaskuosoite (OVT)</label>
-          <input class="form-input" type="text" id="f-ovt" placeholder="003712345678">
+          <input class="form-input" type="text" id="b-ovt" placeholder="003712345678">
           <span class="form-hint">OVT-tunnus</span>
         </div>
         <div class="form-group">
           <label class="form-label">Viite / ostotilausnumero</label>
-          <input class="form-input" type="text" id="f-ref" placeholder="Vapaaehtoinen">
+          <input class="form-input" type="text" id="b-ref" placeholder="Vapaaehtoinen">
         </div>
       </div>
       <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--gray-200);display:flex;justify-content:flex-end;">
-        <button class="btn-primary" id="btn-billing-submit">Lähetä laskutustiedot →</button>
+        <button class="btn-primary" id="btn-billing" onclick="submitBilling()">Lähetä laskutustiedot →</button>
       </div>
     </div>
   </div>
-  <div class="card" id="calendly-card" style="display:none;margin-bottom:12px;">
-    <div class="card-pad" style="text-align:center;padding:40px;">
-      <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:6px;">Varaa onboarding-aika</div>
-      <div style="font-size:13px;color:var(--gray-400);margin-bottom:20px;">60 min aloituspuhelu — määritellään ICP, viestit ja tavoitteet yhdessä.</div>
-      <a href="https://calendly.com/leadnord-meeting/onboarding" target="_blank" class="calendly-btn" style="display:inline-flex;">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;stroke:white;fill:none;">
-          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-        </svg>
-        Varaa aika nyt
-      </a>
+
+  <!-- BILLING SUCCESS (hidden initially) -->
+  <div id="billing-done" class="card" style="display:none;margin-bottom:12px;">
+    <div class="card-pad" style="display:flex;align-items:center;gap:16px;">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00b37e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:500;color:var(--navy);margin-bottom:2px;">Laskutustiedot vastaanotettu</div>
+        <div style="font-size:12px;color:var(--gray-400);">Lähetämme laskun 24 tunnin sisällä laskutussähköpostiisi.</div>
+      </div>
     </div>
   </div>
+
+  <!-- CALENDLY -->
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-pad">
+      <p class="section-label">Varaa onboarding-aika</p>
+      <p style="font-size:13px;color:var(--gray-400);margin-bottom:20px;line-height:1.6;">60 min aloituspuhelu — määritellään ICP, viestit ja tavoitteet yhdessä. Varaa aika suoraan kalenterista.</p>
+      <div style="border-radius:6px;overflow:hidden;border:1px solid var(--gray-200);">
+        <iframe src="https://calendly.com/leadnord-meeting/onboarding?embed_domain=go.leadnord.com&embed_type=Inline" width="100%" height="600" frameborder="0" scrolling="no" style="display:block;min-width:320px;"></iframe>
+      </div>
+    </div>
+  </div>
+
   <div class="company-footer">
     <div><strong>Sentralia Oy</strong> — Y-tunnus 3570381-4</div>
     <div>Kappelikuja 6, 02200 Espoo · <a href="mailto:info@leadnord.com">info@leadnord.com</a></div>
   </div>
+
+</div>
 </div>
 </div>
 
@@ -496,7 +521,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const SUPABASE_URL = 'https://mqmxmdiecibtvglidsvp.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbXhtZGllY2lidHZnbGlkc3ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2MDE5MzYsImV4cCI6MjA5MDE3NzkzNn0.AZPgdnCnE_AxUNvk1dkSYQ4O6KO01_imfUvLB58KctA';
   const VAT = 0.255;
@@ -603,6 +628,7 @@
           var btn = document.getElementById('btn-accept');
           btn.disabled = true;
           btn.textContent = 'Hyväksytään...';
+          currentOffer = o;
           supabaseCall('/rest/v1/offers?id=eq.' + o.id, {
             method: 'PATCH',
             headers: { 'Prefer': 'return=minimal' },
@@ -618,6 +644,7 @@
           });
         });
 
+        currentOffer = o;
         startCountdown(expiresAt);
         setState('state-offer');
         logEvent(o.id, 'opened');
@@ -626,6 +653,61 @@
         console.error('Init error:', e);
         setState('state-error');
       });
+  }
+
+  var currentOffer = null;
+
+  function submitBilling() {
+    var company = document.getElementById('b-company').value.trim();
+    var bid = document.getElementById('b-bid').value.trim();
+    var email = document.getElementById('b-email').value.trim();
+    var method = document.getElementById('b-method').value;
+    if (!company || !bid || !email || !method) {
+      alert('Täytä pakolliset kentät (yritys, Y-tunnus, sähköposti, laskutustapa).');
+      return;
+    }
+    var btn = document.getElementById('btn-billing');
+    btn.disabled = true;
+    btn.textContent = 'Lähetetään...';
+
+    var payload = {
+      offer_id: currentOffer ? currentOffer.id.slice(0,8).toUpperCase() : '-',
+      contact: currentOffer ? currentOffer.contact : '-',
+      company: currentOffer ? currentOffer.company : '-',
+      billing_company: company,
+      billing_business_id: bid,
+      billing_email: email,
+      billing_address: document.getElementById('b-address').value.trim(),
+      payment_method: method,
+      billing_ovt: document.getElementById('b-ovt').value.trim(),
+      billing_reference: document.getElementById('b-ref').value.trim()
+    };
+
+    supabaseCall('/rest/v1/offers?id=eq.' + (currentOffer ? currentOffer.id : 'x'), {
+      method: 'PATCH',
+      headers: { 'Prefer': 'return=minimal' },
+      body: JSON.stringify({
+        payment_method: method,
+        billing_company: company,
+        billing_business_id: bid,
+        billing_email: email,
+        billing_address: payload.billing_address,
+        billing_reference: payload.billing_reference
+      })
+    }).then(function() {
+      return fetch('https://mqmxmdiecibtvglidsvp.supabase.co/functions/v1/send-billing-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }).then(function() {
+      document.getElementById('billing-card').style.display = 'none';
+      document.getElementById('billing-done').style.display = 'block';
+    }).catch(function(e) {
+      btn.disabled = false;
+      btn.textContent = 'Lähetä laskutustiedot →';
+      alert('Virhe lähetyksessä. Ota yhteyttä info@leadnord.com');
+    });
   }
 
   document.addEventListener('DOMContentLoaded', runInit);
@@ -670,11 +752,4 @@
           alert('Virhe. Ota yhteyttä info@leadnord.com');
         });
     }
-    if (e.target && e.target.id === 'f-method') {
-      var einvoice = document.getElementById('einvoice-group');
-      if (einvoice) einvoice.style.display = e.target.value === 'einvoice' ? 'flex' : 'none';
-    }
-  });
-</script>
-</body>
-</html>
+    if
