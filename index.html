@@ -430,4 +430,510 @@
       gap: 8px;
     }
     .hero-contact img { 
-      width
+      width: 80px; 
+      height: 80px; 
+      margin: 0 0 8px 0; 
+    }
+    .hero-contact-tagline { 
+      max-width: 220px; 
+      margin: 4px auto 0; 
+      font-size: 11px; 
+    }
+    .hero-contact-email {
+      margin-top: 4px;
+    }
+
+    .card-pad { padding: 20px 16px; }
+    .pricing-header { grid-template-columns: 1fr; padding: 20px 20px; }
+    .pricing-right { text-align: left; margin-top: 16px; }
+    .pricing-main-price { font-size: 38px; }
+    .features-row { grid-template-columns: 1fr; }
+    .feature-col { border-right: none; border-bottom: 1px solid var(--gray-200); padding: 16px 20px; }
+    .calc-section { padding: 20px 16px; }
+    .calc-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .calc-question { min-width: unset; }
+    .calc-slider-wrap { width: 100%; }
+    .calc-result { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .accept-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .accept-buttons { width: 100%; flex-direction: column; }
+    .accept-buttons button { width: 100%; }
+    .company-footer { flex-direction: column; gap: 6px; text-align: center; padding: 14px; }
+    .countdown-bar { flex-direction: column; gap: 4px; text-align: center; padding: 10px 16px; }
+    .countdown-timer { font-size: 18px; }
+    .hero-label { font-size: 10px; }
+    .validity-badge { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="state-loading" class="state active">
+  <div class="spinner"></div>
+  <p>Ladataan tarjousta...</p>
+</div>
+
+<div id="state-error" class="state">
+  <h2>Tarjousta ei löydy.</h2>
+  <p>Linkki on vanhentunut tai virheellinen. Ota yhteyttä Leadnordiin.</p>
+</div>
+
+<div id="state-offer">
+<div class="page-wrap">
+
+  <div class="topbar">
+    <div class="logo">
+      <span class="logo-arrow">↗</span>
+      Leadnord
+      <span class="logo-tag">/ tarjous</span>
+    </div>
+    <div class="validity-badge">
+      <div class="validity-dot"></div>
+      Voimassa <strong id="valid-until-top">—</strong> asti
+    </div>
+  </div>
+
+  <div class="confidential-bar">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+    <p>Tämä tarjous on laadittu henkilökohtaisesti sinulle — se ei ole julkinen eikä näy hakukoneissa. Älä jaa linkkiä eteenpäin.</p>
+  </div>
+
+  <div class="countdown-bar">
+    <div class="countdown-label">Tarjous voimassa vielä</div>
+    <div class="countdown-timer" id="countdown">— <span>pv</span> — <span>h</span> — <span>min</span> — <span>s</span></div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero">
+      <p class="hero-label">Henkilökohtainen tarjous</p>
+      <h1>Hyvä <em id="contact-name">—</em>,<br>tässä on tarjouksemme<br><em id="company-name">—</em>:lle.</h1>
+      <p class="hero-sub">Leadnord rakentaa outbound-systeemin joka tuo teidän kalenteriin laadukkaita myyntitapaamisia — kuukaudesta toiseen. Olemme erikoistuneet pohjoismaiseen B2B-markkinaan ja tiedämme miten suomalaiset päättäjät tavoitetaan. Alla on ehdotus teidän tilanteenne pohjalta.</p>
+    </div>
+    <div class="hero-contact">
+      <img src="data:image/jpeg;base64,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AAABAAAAAAAAPMFOALIEBSx6AAAAAACAAAAAAJLPBGOAAAMIAAAAAAAABAAAAAANPFMECACAAAAAAAAAAAJAAAAAJPNFKDGAAAAAAAAAAAAAEMBCCEPEJAIAAAAAAAP/2gAMAwEAAgADAAAAEAAAAAAAABtzXfbbbyiAAAAAAAAAAAABDvfffffffffbagAAAAAAAAACL/fffee+9fffffbQAAAAAAAHPffffYZFFHBtfffffQAAAAAEPffffeRBJPGIMvfffffSAAABNfffffZkCPEHHHP/AH3332kAABb33333tAywSjAihr3333304AD333331ZDRyiyhjzj3333330Ab333332ZgCShwDwCzX333332K/wB99999m4w8UUAsAAV999999PV999999U480csYQgc/9999995d999999ekAIQ00oMI1999999999999997oIIQ8kU00199999991999999tqocg04A0c99999999199999995UcIQEoUI9999999tz999999994c4Isg4X9999999yS9999999+kQAM4Esd9999999KQ9999999gksokgsO99999999gAy99993AAA0cggM89999999yAAA193SAAAAw88Mos719999pAAAAASAAAAAAA0oAIkgAWz99gAAAAAAAAAAAAAAI4Y88AAAEgAAAAAAAwAAAAAAQ88osgIAAwAAAAAAAAAAwMAAAAA80UYswAAAAAAAAAAAAAQQIEAQIcsAgAAAAAAA//EABsRAAIDAQEBAAAAAAAAAAAAAAEwESBAAFBg/9oACAECAQE/AER0WjofDIxT0651DEUBQeLlJxC5wnhc4TiDzpOo+CEjAEHgg3CTgCxWcJvK5ZL56fqv/8QAFBEBAAAAAAAAAAAAAAAAAAAAkP/aAAgBAwEBPwAcf//EAEIQAAEDAgMDCQUGBQMEAwAAAAEAAgMEERIhMRMwUQUQICIyQEFhcRQjUoGRM0JiobHRBiRyweE0Q4IVUGPwNVPC/9oACAEBAAE/Au5CN7tGlNpXHXJCkbbNxuvZ4+C2bPgb9EMm4Rpw57m1rmy2bPgb9FsI73wr2VttTdOpD9118vFGGQfdOl8v+xNY52gTaT4nfRNhYzQb90bH9oXTqT4XfVPhey+WQ8R31kT36BMpmDXNad0dBG4dmx4hPpntzHWH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" alt="Miika Pihlajaharju">
+      <div class="hero-contact-role">Yhteyshenkilösi</div>
+      <div class="hero-contact-name">Miika Pihlajaharju</div>
+      <div class="hero-contact-tagline">Odotan innolla, että pääsemme rakentamaan kasvua yhdessä.</div>
+      <a href="mailto:miika@leadnord.com" class="hero-contact-email">miika@leadnord.com</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="pricing-header">
+      <div>
+        <div class="pricing-eyebrow">Per buukattu tapaaminen</div>
+        <div class="pricing-main-price" id="per-meeting-price">249€</div>
+        <div class="pricing-main-label">per vahvistettu myyntitapaaminen</div>
+        <div class="pricing-vat" id="per-meeting-vat">+ alv 25,5%</div>
+        <div class="pricing-teal">Maksat vain tuloksista.</div>
+        <div class="pricing-minimum" id="minimum-text">* Minimiveloitus 1 490€/kk (+ alv)</div>
+      </div>
+      <div class="pricing-right">
+        <div class="pricing-setup-label">Aloitusmaksu</div>
+        <div class="pricing-setup-fee" id="setup-fee-price">1 490€</div>
+        <div class="pricing-setup-vat">+ alv 25,5%</div>
+        <div class="pricing-setup-sub">kertaluonteinen</div>
+        <div class="setup-discount" id="setup-discount" style="display:none"></div>
+      </div>
+    </div>
+
+    <div class="features-row">
+      <div class="feature-col">
+        <div class="feature-col-label">Outreach</div>
+        <div class="feature-item"><span class="feature-dot"></span>Räätälöidyt email-sekvenssit</div>
+        <div class="feature-item"><span class="feature-dot"></span>A/B-testaus viesteille</div>
+        <div class="feature-item"><span class="feature-dot"></span>Puhelinbuukkaus</div>
+        <div class="feature-item"><span class="feature-dot"></span>Vapaa kohderyhmien valinta</div>
+      </div>
+      <div class="feature-col">
+        <div class="feature-col-label">Hallinta</div>
+        <div class="feature-item"><span class="feature-dot"></span>Kalenterinhallinta</div>
+        <div class="feature-item"><span class="feature-dot"></span>Siirtyneiden uudelleenorganisointi</div>
+        <div class="feature-item"><span class="feature-dot"></span>Dedikoitu account manager</div>
+        <div class="feature-item"><span class="feature-dot"></span>Onboarding 2 viikossa</div>
+      </div>
+      <div class="feature-col">
+        <div class="feature-col-label">Raportointi</div>
+        <div class="feature-item"><span class="feature-dot"></span>Viikkoraportti</div>
+        <div class="feature-item"><span class="feature-dot"></span>KPI-seuranta</div>
+        <div class="feature-item"><span class="feature-dot"></span>Kuukausikatsaus</div>
+        <div class="feature-item"><span class="feature-dot"></span>3 kuukauden sopimus</div>
+      </div>
+    </div>
+
+    <div class="calc-section">
+      <div class="calc-label">Laske kuukausikustannuksesi</div><div class="calc-sublabel">Siirrä liukusäädintä — laskuri päivittyy reaaliajassa</div>
+      <div class="calc-row">
+        <div class="calc-question">Kuinka monta tapaamista tavoittelet kuukaudessa?</div>
+        <div class="calc-slider-wrap">
+          <input type="range" id="meetings-slider" min="1" max="40" value="10" step="1">
+          <div class="slider-val" id="meetings-val">10</div>
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="calc-result-item">
+          <div class="calc-result-label">Tapaamismaksu (alv 0%)</div>
+          <div class="calc-result-value" id="result-meetings">2 490€</div>
+        </div>
+        <div class="calc-result-item">
+          <div class="calc-result-label">Minimiveloitus (alv 0%)</div>
+          <div class="calc-result-value" id="result-minimum">1 490€</div>
+        </div>
+        <div class="calc-result-item">
+          <div class="calc-result-label">Yhteensä sis. alv</div>
+          <div class="calc-result-value total" id="result-total">3 128€</div>
+        </div>
+      </div>
+      <div class="calc-vat-note">Hinnat ovat verottomia (alv 0%). Arvonlisävero 25,5% lisätään laskuun.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-pad">
+      <p class="section-label">Miten edetään</p>
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-title">Hyväksy tarjous</div>
+          <div class="step-desc">Täytä laskutustiedot — lähetämme laskun 24h sisällä.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-title">Aloitusmaksu</div>
+          <div class="step-desc">Työ käynnistyy kun aloitusmaksu on vahvistunut.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-title">Onboarding-call</div>
+          <div class="step-desc">60 min aloituspuhelu — ICP, viestit ja tavoitteet.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-title">Outreach käynnistyy</div>
+          <div class="step-desc">Ensimmäiset viestit lähtevät 2 viikon sisällä.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-pad">
+      <p class="section-label">Hyväksy tarjous</p>
+      <p class="billing-intro">Olet yhden klikkauksen päässä. Hyväksymällä tarjouksen siirryt laskutustietojen täyttämiseen ja onboarding-ajan varaamiseen.</p>
+      <div class="accept-row">
+        <div class="accept-terms">
+          <p>Hyväksymällä sitoudut <a onclick="document.getElementById('terms-modal').classList.add('open')">palveluehtojemme</a> mukaiseen 3 kuukauden sopimukseen.</p>
+        </div>
+        <div class="accept-buttons">
+          <button class="btn-secondary" id="btn-ask">Haluan kysyä ensin</button>
+          <button class="btn-primary btn-large" id="btn-accept">Hyväksy tarjous →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="company-footer">
+    <div><strong>Sentralia Oy</strong> — Y-tunnus 3570381-4</div>
+    <div>Kappelikuja 6, 02200 Espoo &nbsp;·&nbsp; <a href="mailto:info@leadnord.com">info@leadnord.com</a></div>
+    <div style="color:var(--gray-400)">Viite: <span id="offer-ref">—</span></div>
+  </div>
+
+</div>
+</div>
+
+<div id="state-success" class="state" style="display:none;min-height:unset;align-items:unset;padding:0;">
+<div class="page-wrap">
+  <div class="topbar" style="position:relative;margin-bottom:12px;">
+    <div class="logo"><span class="logo-arrow">↗</span>Leadnord<span class="logo-tag">/ tarjous hyväksytty</span></div>
+  </div>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-pad" style="display:flex;align-items:center;gap:16px;">
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b37e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div>
+        <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:2px;">Tarjous hyväksytty — kiitos!</div>
+        <div style="font-size:13px;color:var(--gray-400);">Täytä laskutustiedot alla ja varaa onboarding-aika. Lähetämme laskun 24h sisällä.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-pad">
+      <p class="section-label">Laskutustiedot</p>
+      <div class="form-grid">
+        <div class="form-group form-full">
+          <label class="form-label">Yrityksen virallinen nimi *</label>
+          <input class="form-input" type="text" id="f-company" placeholder="Yritys Oy">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Y-tunnus *</label>
+          <input class="form-input" type="text" id="f-bid" placeholder="1234567-8">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Laskutussähköposti *</label>
+          <input class="form-input" type="email" id="f-email" placeholder="laskut@yritys.fi">
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Laskutusosoite</label>
+          <input class="form-input" type="text" id="f-address" placeholder="Katuosoite, postinumero, kaupunki">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Laskutustapa *</label>
+          <select class="form-select" id="f-method">
+            <option value="">Valitse...</option>
+            <option value="email">Sähköpostilasku (PDF)</option>
+            <option value="einvoice">Verkkolasku (e-lasku)</option>
+          </select>
+        </div>
+        <div class="form-group" id="einvoice-group" style="display:none">
+          <label class="form-label">Verkkolaskuosoite (OVT)</label>
+          <input class="form-input" type="text" id="f-ovt" placeholder="003712345678">
+          <span class="form-hint">OVT-tunnus</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Viite / ostotilausnumero</label>
+          <input class="form-input" type="text" id="f-ref" placeholder="Vapaaehtoinen">
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--gray-200);display:flex;justify-content:flex-end;">
+        <button class="btn-primary" id="btn-billing-submit">Lähetä laskutustiedot →</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="calendly-card" style="display:none;margin-bottom:12px;">
+    <div class="card-pad" style="text-align:center;padding:40px;">
+      <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:6px;">Varaa onboarding-aika</div>
+      <div style="font-size:13px;color:var(--gray-400);margin-bottom:20px;">60 min aloituspuhelu — määritellään ICP, viestit ja tavoitteet yhdessä.</div>
+      <a href="https://calendly.com/leadnord-meeting/onboarding" target="_blank" class="calendly-btn" style="display:inline-flex;">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;stroke:white;fill:none;">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Varaa aika nyt
+      </a>
+    </div>
+  </div>
+  <div class="company-footer">
+    <div><strong>Sentralia Oy</strong> — Y-tunnus 3570381-4</div>
+    <div>Kappelikuja 6, 02200 Espoo · <a href="mailto:info@leadnord.com">info@leadnord.com</a></div>
+  </div>
+</div>
+</div>
+
+<div class="modal-backdrop" id="terms-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <h2>Palveluehdot</h2>
+    <div class="modal-term">
+      <h3>Sopimuspituus</h3>
+      <p>Sopimus on voimassa 3 kuukautta aloitusmaksun suorituksesta. 3 kuukautta on todettu sopivaksi ajaksi nähdä konkreettisia tuloksia B2B-outreach-toiminnassa — tässä ajassa pipeline ehtii rakentua ja tapaamisia syntyy mitattavasti. Alkuperäisen sopimuskauden jälkeen sopimus jatkuu kuukausittain kunnes jompikumpi osapuoli irtisanoo sen.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Irtisanominen</h3>
+      <p>Sopimuksen voi irtisanoa 30 päivän kirjallisella ilmoituksella sähköpostitse osoitteeseen info@leadnord.com. Irtisanominen astuu voimaan seuraavan laskutuskauden päättyessä.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Hinnoittelu ja arvonlisävero</h3>
+      <p>Laskutus perustuu vahvistettuihin myyntitapaamisiin. Minimiveloitus on 1 490€/kk (alv 0%) riippumatta tapaamismäärästä. Kaikki hinnat ovat verottomia — arvonlisävero 25,5% lisätään laskuun. Aloitusmaksu laskutetaan sopimuksen vahvistuksesta.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Tapaamisen määritelmä</h3>
+      <p>Tapaaminen on vahvistettu, kalenteroitu myyntikeskustelu asiakkaan ja teidän myyntihenkilönne välillä. Peruuntunut tapaaminen jota ei uudelleenaikatauluteta ei ole laskutettava.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Luottamuksellisuus</h3>
+      <p>Molemmat osapuolet sitoutuvat pitämään luottamuksellisina kaikki toiselta osapuolelta saamat liikesalaisuudet ja asiakastiedot.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Vastuu</h3>
+      <p>Leadnord vastaa outreach-toimenpiteiden laadusta ja volyymin tavoittelusta. Emme takaa tiettyä tapaamismäärää, mutta sitoudumme aktiiviseen ja läpinäkyvään tekemiseen viikoittaisine raportointeineen.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Sovellettava laki</h3>
+      <p>Sopimukseen sovelletaan Suomen lakia. Riidat ratkaistaan ensisijaisesti neuvottelemalla.</p>
+    </div>
+    <button class="modal-close" onclick="document.getElementById('terms-modal').classList.remove('open')">Sulje</button>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://mqmxmdiecibtvglidsvp.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbXhtZGllY2lidHZnbGlkc3ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2MDE5MzYsImV4cCI6MjA5MDE3NzkzNn0.AZPgdnCnE_AxUNvk1dkSYQ4O6KO01_imfUvLB58KctA';
+  const VAT = 0.255;
+
+  function setState(id) {
+    ['state-loading','state-error','state-offer','state-success'].forEach(function(s) {
+      document.getElementById(s).classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+  }
+
+  function fmt(n) { return Math.round(n).toLocaleString('fi-FI') + '€'; }
+
+  function supabaseCall(path, opts) {
+    opts = opts || {};
+    return fetch(SUPABASE_URL + path, Object.assign({}, opts, {
+      headers: Object.assign({
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json'
+      }, opts.headers || {})
+    })).then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (res.status === 204) return null;
+      return res.json();
+    });
+  }
+
+  function logEvent(offerId, event) {
+    supabaseCall('/rest/v1/offer_events', {
+      method: 'POST',
+      body: JSON.stringify({ offer_id: offerId, event: event })
+    }).catch(function(e) { console.warn('Event log failed', e); });
+  }
+
+  function startCountdown(expiresAt) {
+    var el = document.getElementById('countdown');
+    function tick() {
+      var diff = new Date(expiresAt) - new Date();
+      if (diff <= 0) { el.textContent = 'Tarjous vanhentunut'; return; }
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      el.innerHTML = d + '<span>pv</span>' + String(h).padStart(2,'0') + '<span>h</span>' + String(m).padStart(2,'0') + '<span>min</span>' + String(s).padStart(2,'0') + '<span>s</span>';
+    }
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  function runInit() {
+    var params = new URLSearchParams(window.location.search);
+    var token = params.get('t') || window.location.pathname.split('/').pop();
+    if (!token || token.length < 8) { setState('state-error'); return; }
+
+    supabaseCall('/rest/v1/offers?token=eq.' + token + '&select=*')
+      .then(function(data) {
+        if (!data || data.length === 0) { setState('state-error'); return; }
+        var o = data[0];
+
+        var expiresAt = new Date(o.valid_until);
+        expiresAt.setHours(23, 59, 59, 999);
+        if (expiresAt < new Date()) { setState('state-error'); return; }
+
+        document.getElementById('contact-name').textContent = o.contact;
+        document.getElementById('company-name').textContent = o.company;
+        document.getElementById('valid-until-top').textContent = new Date(o.valid_until).toLocaleDateString('fi-FI');
+        document.getElementById('offer-ref').textContent = o.id.slice(0,8).toUpperCase();
+
+        var setupFee = o.setup_fee || 1490;
+        var perMeeting = o.per_meeting_fee || 249;
+        var minimum = o.monthly_minimum || 1490;
+
+        document.getElementById('per-meeting-price').textContent = fmt(perMeeting);
+        document.getElementById('setup-fee-price').textContent = fmt(setupFee);
+        document.getElementById('minimum-text').textContent = '* Minimiveloitus ' + fmt(minimum) + '/kk (+ alv)';
+
+        if (setupFee < 1490) {
+          var disc = document.getElementById('setup-discount');
+          disc.style.display = 'inline-block';
+          disc.textContent = 'Alennettu 1 490€ → ' + fmt(setupFee);
+        }
+
+        var slider = document.getElementById('meetings-slider');
+        function updateCalc() {
+          var m = parseInt(slider.value);
+          document.getElementById('meetings-val').textContent = m;
+          var meetCost = m * perMeeting;
+          var base = Math.max(meetCost, minimum);
+          var totalVat = base * (1 + VAT);
+          document.getElementById('result-meetings').textContent = fmt(meetCost);
+          document.getElementById('result-minimum').textContent = fmt(minimum);
+          document.getElementById('result-total').textContent = fmt(totalVat);
+          document.getElementById('result-total').style.color = meetCost < minimum ? 'var(--gray-400)' : 'var(--blue)';
+        }
+        slider.addEventListener('input', updateCalc);
+        updateCalc();
+
+        document.getElementById('btn-ask').addEventListener('click', function() {
+          window.location.href = 'mailto:info@leadnord.com?subject=Kysymys tarjouksesta ' + o.id.slice(0,8).toUpperCase() + '&body=Hei,%0A%0AMinulla on kysymys tarjouksestanne.%0A%0ATerveisin,%0A' + o.contact;
+        });
+
+        document.getElementById('btn-accept').addEventListener('click', function() {
+          var btn = document.getElementById('btn-accept');
+          btn.disabled = true;
+          btn.textContent = 'Hyväksytään...';
+          supabaseCall('/rest/v1/offers?id=eq.' + o.id, {
+            method: 'PATCH',
+            headers: { 'Prefer': 'return=minimal' },
+            body: JSON.stringify({ status: 'accepted' })
+          }).then(function() {
+            logEvent(o.id, 'accepted');
+            setState('state-success');
+            window.scrollTo(0,0);
+          }).catch(function(e) {
+            btn.disabled = false;
+            btn.textContent = 'Hyväksy tarjous →';
+            alert('Virhe. Yritä uudelleen tai ota yhteyttä info@leadnord.com');
+          });
+        });
+
+        startCountdown(expiresAt);
+        setState('state-offer');
+        logEvent(o.id, 'opened');
+      })
+      .catch(function(e) {
+        console.error('Init error:', e);
+        setState('state-error');
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', runInit);
+
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'btn-billing-submit') {
+      var company = document.getElementById('f-company').value.trim();
+      var bid = document.getElementById('f-bid').value.trim();
+      var email = document.getElementById('f-email').value.trim();
+      var method = document.getElementById('f-method').value;
+      if (!company || !bid || !email || !method) {
+        alert('Täytä pakolliset kentät (yritys, Y-tunnus, sähköposti, laskutustapa).');
+        return;
+      }
+      var btn = e.target;
+      btn.disabled = true;
+      btn.textContent = 'Lähetetään...';
+      supabaseCall('/rest/v1/offers?status=eq.accepted&select=id&limit=1')
+        .then(function(data) {
+          var id = data && data[0] ? data[0].id : null;
+          if (!id) { btn.disabled=false; btn.textContent='Lähetä laskutustiedot →'; return; }
+          return supabaseCall('/rest/v1/offers?id=eq.' + id, {
+            method: 'PATCH',
+            headers: { 'Prefer': 'return=minimal' },
+            body: JSON.stringify({
+              payment_method: method,
+              billing_company: company,
+              billing_business_id: bid,
+              billing_email: email,
+              billing_address: document.getElementById('f-address').value.trim(),
+              billing_reference: document.getElementById('f-ref').value.trim()
+            })
+          });
+        }).then(function() {
+          document.querySelector('.card:has(#btn-billing-submit)').innerHTML = '<div class="card-pad" style="text-align:center;padding:32px;"><div style="color:var(--teal);font-size:14px;font-weight:500;margin-bottom:4px;">✓ Laskutustiedot vastaanotettu</div><div style="font-size:13px;color:var(--gray-400);">Lähetämme laskun 24 tunnin sisällä.</div></div>';
+          document.getElementById('calendly-card').style.display = 'block';
+        }).catch(function() {
+          btn.disabled = false;
+          btn.textContent = 'Lähetä laskutustiedot →';
+          alert('Virhe. Ota yhteyttä info@leadnord.com');
+        });
+    }
+    if (e.target && e.target.id === 'f-method') {
+      var einvoice = document.getElementById('einvoice-group');
+      if (einvoice) einvoice.style.display = e.target.value === 'einvoice' ? 'flex' : 'none';
+    }
+  });
+</script>
+</body>
+</html>
