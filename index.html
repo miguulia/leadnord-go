@@ -66,17 +66,17 @@
 
   /* PRICING HEADER */
   .pricing-header { background: var(--navy); border-left: 4px solid var(--blue); color: white; padding: 36px 40px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; }
-  .pricing-eyebrow { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+  .pricing-eyebrow { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
   .pricing-main-price { font-family: 'DM Serif Display', serif; font-size: 48px; line-height: 1; color: white; }
-  .pricing-main-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 5px; }
+  .pricing-main-label { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 5px; }
   .pricing-teal { color: var(--teal); font-size: 13px; margin-top: 14px; }
-  .pricing-minimum { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 6px; }
-  .pricing-vat { font-size: 10px; color: rgba(255,255,255,0.25); margin-top: 3px; }
+  .pricing-minimum { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 6px; }
+  .pricing-vat { font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 3px; }
   .pricing-right { text-align: right; }
-  .pricing-setup-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+  .pricing-setup-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 5px; }
   .pricing-setup-fee { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--blue); line-height: 1; }
-  .pricing-setup-vat { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 3px; }
-  .pricing-setup-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 3px; }
+  .pricing-setup-vat { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 3px; }
+  .pricing-setup-sub { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 3px; }
   .setup-discount { display: inline-block; margin-top: 8px; background: rgba(0,229,160,0.15); color: var(--teal); font-size: 11px; padding: 3px 10px; border-radius: 100px; border: 1px solid rgba(0,229,160,0.3); }
 
   /* FEATURES */
@@ -94,8 +94,9 @@
   .calc-row { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
   .calc-question { font-size: 13px; color: var(--gray-600); min-width: 220px; }
   .calc-slider-wrap { flex: 1; display: flex; align-items: center; gap: 14px; }
-  input[type=range] { flex: 1; -webkit-appearance: none; height: 2px; background: var(--gray-200); outline: none; }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 0 0 1px var(--blue); }
+  input[type=range] { flex: 1; -webkit-appearance: none; height: 4px; background: var(--gray-200); outline: none; border-radius: 2px; }
+  @keyframes pulse-thumb { 0%,100%{box-shadow:0 0 0 4px rgba(77,110,245,0.25)} 50%{box-shadow:0 0 0 9px rgba(77,110,245,0.1)} }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--blue); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 0 0 4px rgba(77,110,245,0.25); animation: pulse-thumb 2s ease-in-out infinite; }
   .slider-val { font-family: 'DM Serif Display', serif; font-size: 24px; min-width: 44px; text-align: right; color: var(--navy); }
   .calc-result { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
   .calc-result-item { background: var(--white); padding: 20px 24px; }
@@ -166,26 +167,42 @@
   #state-offer { display: none; }
   #state-offer.active { display: block; }
 
+  .accept-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 8px; }
+  .accept-terms p { font-size: 12px; color: var(--gray-400); line-height: 1.55; max-width: 380px; }
+  .accept-terms a { color: var(--blue); text-decoration: underline; cursor: pointer; }
+  .accept-buttons { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+  .btn-large { padding: 16px 40px; font-size: 15px; }
+
   @media (max-width: 700px) {
-    .page-wrap { padding: 16px 12px 48px; }
+    .page-wrap { padding: 12px 10px 48px; }
     .topbar { padding: 12px 16px; }
-    .hero-card { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+    .hero-card { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
     .hero-contact { display: flex; align-items: center; gap: 14px; text-align: left; }
-    .hero-contact img { width: 72px; height: 72px; margin: 0; }
-    .hero-contact-tagline { max-width: none; }
-    .card-pad { padding: 24px 20px; }
-    .pricing-header { grid-template-columns: 1fr; padding: 24px 20px; }
-    .pricing-right { text-align: left; margin-top: 20px; }
+    .hero-contact img { width: 64px; height: 64px; margin: 0; }
+    .hero-contact-tagline { max-width: none; font-size: 11px; }
+    .hero h1 { font-size: 28px; }
+    .hero-sub { font-size: 14px; }
+    .card-pad { padding: 20px 16px; }
+    .pricing-header { grid-template-columns: 1fr; padding: 20px 20px; }
+    .pricing-right { text-align: left; margin-top: 16px; }
+    .pricing-main-price { font-size: 38px; }
     .features-row { grid-template-columns: 1fr; }
-    .feature-col { border-right: none; border-bottom: 1px solid var(--gray-200); padding: 20px; }
-    .calc-section { padding: 24px 20px; }
+    .feature-col { border-right: none; border-bottom: 1px solid var(--gray-200); padding: 16px 20px; }
+    .calc-section { padding: 20px 16px; }
     .calc-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .calc-question { min-width: unset; }
+    .calc-slider-wrap { width: 100%; }
     .calc-result { grid-template-columns: 1fr; }
     .steps-grid { grid-template-columns: 1fr 1fr; }
     .form-grid { grid-template-columns: 1fr; }
-    .cta-row { flex-direction: column; align-items: flex-start; }
+    .accept-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .accept-buttons { width: 100%; flex-direction: column; }
+    .accept-buttons button { width: 100%; }
     .company-footer { flex-direction: column; gap: 6px; text-align: center; padding: 14px; }
     .countdown-bar { flex-direction: column; gap: 4px; text-align: center; padding: 10px 16px; }
+    .countdown-timer { font-size: 18px; }
+    .hero-label { font-size: 10px; }
+    .validity-badge { font-size: 11px; }
   }
 </style>
 </head>
@@ -287,7 +304,7 @@
     </div>
 
     <div class="calc-section">
-      <div class="calc-label">Laske arvioitu kuukausikustannus</div>
+      <div class="calc-label">Laske kuukausikustannuksesi</div><div class="calc-sublabel">Siirrä liukusäädintä — laskuri päivittyy reaaliajassa</div>
       <div class="calc-row">
         <div class="calc-question">Kuinka monta tapaamista tavoittelet kuukaudessa?</div>
         <div class="calc-slider-wrap">
@@ -344,7 +361,47 @@
   <div class="card">
     <div class="card-pad">
       <p class="section-label">Hyväksy tarjous</p>
-      <p class="billing-intro">Täytä laskutustietosi alla. Lähetämme laskun 24 tunnin sisällä — työ käynnistyy kun aloitusmaksu on vahvistunut. Hyväksyttyäsi tarjouksen voit varata onboarding-ajan suoraan seuraavalla sivulla.</p>
+      <p class="billing-intro">Olet yhden klikkauksen päässä. Hyväksymällä tarjouksen siirryt laskutustietojen täyttämiseen ja onboarding-ajan varaamiseen.</p>
+      <div class="accept-row">
+        <div class="accept-terms">
+          <p>Hyväksymällä sitoudut <a onclick="document.getElementById('terms-modal').classList.add('open')">palveluehtojemme</a> mukaiseen 3 kuukauden sopimukseen.</p>
+        </div>
+        <div class="accept-buttons">
+          <button class="btn-secondary" id="btn-ask">Haluan kysyä ensin</button>
+          <button class="btn-primary btn-large" id="btn-accept">Hyväksy tarjous →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="company-footer">
+    <div><strong>Sentralia Oy</strong> — Y-tunnus 3570381-4</div>
+    <div>Kappelikuja 6, 02200 Espoo &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#d1b8bfb7be91bdb4b0b5bfbea3b5ffb2bebc"><span class="__cf_email__" data-cfemail="c4adaaa2ab84a8a1a5a0aaabb6a0eaa7aba9">[email&#160;protected]</span></a></div>
+    <div style="color:var(--gray-400)">Viite: <span id="offer-ref">—</span></div>
+  </div>
+
+</div>
+</div>
+
+<div id="state-success" class="state" style="display:none;min-height:unset;align-items:unset;padding:0;">
+<div class="page-wrap">
+  <div class="topbar" style="position:relative;margin-bottom:12px;">
+    <div class="logo"><span class="logo-arrow">↗</span>Leadnord<span class="logo-tag">/ tarjous hyväksytty</span></div>
+  </div>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-pad" style="display:flex;align-items:center;gap:16px;">
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00b37e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div>
+        <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:2px;">Tarjous hyväksytty — kiitos!</div>
+        <div style="font-size:13px;color:var(--gray-400);">Täytä laskutustiedot alla ja varaa onboarding-aika. Lähetämme laskun 24h sisällä.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-pad">
+      <p class="section-label">Laskutustiedot</p>
       <div class="form-grid">
         <div class="form-group form-full">
           <label class="form-label">Yrityksen virallinen nimi *</label>
@@ -380,43 +437,28 @@
           <input class="form-input" type="text" id="f-ref" placeholder="Vapaaehtoinen">
         </div>
       </div>
-      <div class="cta-row">
-        <div class="cta-left">
-          <p>Hyväksymällä sitoudut <a onclick="document.getElementById('terms-modal').classList.add('open')">palveluehtojemme</a> mukaiseen 3 kuukauden sopimukseen. Työ käynnistyy aloitusmaksun vahvistuttua.</p>
-        </div>
-        <div class="cta-buttons">
-          <button class="btn-secondary" id="btn-ask">Haluan kysyä ensin</button>
-          <button class="btn-primary" id="btn-accept">Hyväksy ja lähetä →</button>
-        </div>
+      <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--gray-200);display:flex;justify-content:flex-end;">
+        <button class="btn-primary" id="btn-billing-submit">Lähetä laskutustiedot →</button>
       </div>
     </div>
   </div>
-
+  <div class="card" id="calendly-card" style="display:none;margin-bottom:12px;">
+    <div class="card-pad" style="text-align:center;padding:40px;">
+      <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:6px;">Varaa onboarding-aika</div>
+      <div style="font-size:13px;color:var(--gray-400);margin-bottom:20px;">60 min aloituspuhelu — määritellään ICP, viestit ja tavoitteet yhdessä.</div>
+      <a href="https://calendly.com/leadnord-meeting/onboarding" target="_blank" class="calendly-btn" style="display:inline-flex;">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;stroke:white;fill:none;">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Varaa aika nyt
+      </a>
+    </div>
+  </div>
   <div class="company-footer">
     <div><strong>Sentralia Oy</strong> — Y-tunnus 3570381-4</div>
-    <div>Kappelikuja 6, 02200 Espoo &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#d1b8bfb7be91bdb4b0b5bfbea3b5ffb2bebc"><span class="__cf_email__" data-cfemail="c4adaaa2ab84a8a1a5a0aaabb6a0eaa7aba9">[email&#160;protected]</span></a></div>
-    <div style="color:var(--gray-400)">Viite: <span id="offer-ref">—</span></div>
+    <div>Kappelikuja 6, 02200 Espoo · <a href="mailto:info@leadnord.com">info@leadnord.com</a></div>
   </div>
-
 </div>
-</div>
-
-<div id="state-success" class="state">
-  <div class="success-icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </div>
-  <h2>Tarjous hyväksytty.</h2>
-  <p>Lähetämme laskun laskutussähköpostiisi 24 tunnin sisällä.</p>
-  <p>Työ käynnistyy maksun vahvistuttua.</p>
-  <p style="margin-top:12px;font-size:14px;color:var(--navy);font-weight:500;">Varaa onboarding-aika nyt — 60 min aloituspuhelu.</p>
-  <a href="https://calendly.com/leadnord-meeting/onboarding" target="_blank" class="calendly-btn">
-    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-    </svg>
-    Varaa onboarding-aika
-  </a>
 </div>
 
 <div class="modal-backdrop" id="terms-modal" onclick="if(event.target===this)this.classList.remove('open')">
@@ -553,45 +595,26 @@
         slider.addEventListener('input', updateCalc);
         updateCalc();
 
-        document.getElementById('f-method').addEventListener('change', function() {
-          document.getElementById('einvoice-group').style.display = this.value === 'einvoice' ? 'flex' : 'none';
-        });
-
         document.getElementById('btn-ask').addEventListener('click', function() {
           window.location.href = 'mailto:info@leadnord.com?subject=Kysymys tarjouksesta ' + o.id.slice(0,8).toUpperCase() + '&body=Hei,%0A%0AMinulla on kysymys tarjouksestanne.%0A%0ATerveisin,%0A' + o.contact;
         });
 
         document.getElementById('btn-accept').addEventListener('click', function() {
-          var company = document.getElementById('f-company').value.trim();
-          var bid = document.getElementById('f-bid').value.trim();
-          var email = document.getElementById('f-email').value.trim();
-          var method = document.getElementById('f-method').value;
-          if (!company || !bid || !email || !method) {
-            alert('Täytä pakolliset kentät (yritys, Y-tunnus, sähköposti, laskutustapa).');
-            return;
-          }
           var btn = document.getElementById('btn-accept');
           btn.disabled = true;
-          btn.textContent = 'Lähetetään...';
+          btn.textContent = 'Hyväksytään...';
           supabaseCall('/rest/v1/offers?id=eq.' + o.id, {
             method: 'PATCH',
             headers: { 'Prefer': 'return=minimal' },
-            body: JSON.stringify({
-              status: 'accepted',
-              payment_method: method,
-              billing_company: company,
-              billing_business_id: bid,
-              billing_email: email,
-              billing_address: document.getElementById('f-address').value.trim(),
-              billing_reference: document.getElementById('f-ref').value.trim()
-            })
+            body: JSON.stringify({ status: 'accepted' })
           }).then(function() {
             logEvent(o.id, 'accepted');
             setState('state-success');
+            window.scrollTo(0,0);
           }).catch(function(e) {
             btn.disabled = false;
-            btn.textContent = 'Hyväksy ja lähetä →';
-            alert('Virhe lähetyksessä. Yritä uudelleen tai ota yhteyttä info@leadnord.com');
+            btn.textContent = 'Hyväksy tarjous →';
+            alert('Virhe. Yritä uudelleen tai ota yhteyttä info@leadnord.com');
           });
         });
 
@@ -606,6 +629,52 @@
   }
 
   document.addEventListener('DOMContentLoaded', runInit);
+
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'btn-billing-submit') {
+      var company = document.getElementById('f-company').value.trim();
+      var bid = document.getElementById('f-bid').value.trim();
+      var email = document.getElementById('f-email').value.trim();
+      var method = document.getElementById('f-method').value;
+      if (!company || !bid || !email || !method) {
+        alert('Täytä pakolliset kentät (yritys, Y-tunnus, sähköposti, laskutustapa).');
+        return;
+      }
+      var offerId = document.getElementById('offer-ref') ? 
+        document.getElementById('offer-ref').textContent : '';
+      var btn = e.target;
+      btn.disabled = true;
+      btn.textContent = 'Lähetetään...';
+      supabaseCall('/rest/v1/offers?status=eq.accepted&select=id&limit=1')
+        .then(function(data) {
+          var id = data && data[0] ? data[0].id : null;
+          if (!id) { btn.disabled=false; btn.textContent='Lähetä laskutustiedot →'; return; }
+          return supabaseCall('/rest/v1/offers?id=eq.' + id, {
+            method: 'PATCH',
+            headers: { 'Prefer': 'return=minimal' },
+            body: JSON.stringify({
+              payment_method: method,
+              billing_company: company,
+              billing_business_id: bid,
+              billing_email: email,
+              billing_address: document.getElementById('f-address').value.trim(),
+              billing_reference: document.getElementById('f-ref').value.trim()
+            })
+          });
+        }).then(function() {
+          document.querySelector('.card:has(#btn-billing-submit)').innerHTML = '<div class="card-pad" style="text-align:center;padding:32px;"><div style="color:var(--teal);font-size:14px;font-weight:500;margin-bottom:4px;">✓ Laskutustiedot vastaanotettu</div><div style="font-size:13px;color:var(--gray-400);">Lähetämme laskun 24 tunnin sisällä.</div></div>';
+          document.getElementById('calendly-card').style.display = 'block';
+        }).catch(function() {
+          btn.disabled = false;
+          btn.textContent = 'Lähetä laskutustiedot →';
+          alert('Virhe. Ota yhteyttä info@leadnord.com');
+        });
+    }
+    if (e.target && e.target.id === 'f-method') {
+      var einvoice = document.getElementById('einvoice-group');
+      if (einvoice) einvoice.style.display = e.target.value === 'einvoice' ? 'flex' : 'none';
+    }
+  });
 </script>
 </body>
 </html>
