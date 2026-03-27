@@ -460,7 +460,7 @@
   const VAT = 0.255;
 
   function setState(id) {
-    ['state-loading','state-error','state-offer','state-success'].forEach(s => {
+    ['state-loading','state-error','state-offer','state-success'].forEach(function(s) {
       document.getElementById(s).classList.remove('active');
     });
     document.getElementById(id).classList.add('active');
@@ -468,108 +468,112 @@
 
   function fmt(n) { return Math.round(n).toLocaleString('fi-FI') + '€'; }
 
-  async function supabase(path, opts = {}) {
-    const res = await fetch(SUPABASE_URL + path, {
-      ...opts,
-      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Content-Type': 'application/json', ...(opts.headers||{}) }
+  function supabaseCall(path, opts) {
+    opts = opts || {};
+    return fetch(SUPABASE_URL + path, Object.assign({}, opts, {
+      headers: Object.assign({
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json'
+      }, opts.headers || {})
+    })).then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (res.status === 204) return null;
+      return res.json();
     });
-    if (!res.ok) throw new Error(await res.text());
-    return res.status === 204 ? null : res.json();
   }
 
-  async function logEvent(offerId, event) {
-    try { await supabase('/rest/v1/offer_events', { method: 'POST', body: JSON.stringify({ offer_id: offerId, event }) }); }
-    catch(e) { console.warn('Event log failed', e); }
+  function logEvent(offerId, event) {
+    supabaseCall('/rest/v1/offer_events', {
+      method: 'POST',
+      body: JSON.stringify({ offer_id: offerId, event: event })
+    }).catch(function(e) { console.warn('Event log failed', e); });
   }
 
   function startCountdown(expiresAt) {
-    const el = document.getElementById('countdown');
+    var el = document.getElementById('countdown');
     function tick() {
-      const diff = new Date(expiresAt) - new Date();
+      var diff = new Date(expiresAt) - new Date();
       if (diff <= 0) { el.textContent = 'Tarjous vanhentunut'; return; }
-      const d = Math.floor(diff / 86400000);
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
       el.innerHTML = d + '<span>pv</span>' + String(h).padStart(2,'0') + '<span>h</span>' + String(m).padStart(2,'0') + '<span>min</span>' + String(s).padStart(2,'0') + '<span>s</span>';
     }
     tick();
     setInterval(tick, 1000);
   }
 
-  async function init() {
-    const dbg = (msg) => { document.getElementById('state-loading').querySelector('p').textContent = msg; console.log(msg); };
-    const token = new URLSearchParams(location.search).get('t') || location.pathname.split('/').pop();
-    dbg('Token: ' + token);
+  function runInit() {
+    var params = new URLSearchParams(window.location.search);
+    var token = params.get('t') || window.location.pathname.split('/').pop();
     if (!token || token.length < 8) { setState('state-error'); return; }
-    try {
-      dbg('Fetching from Supabase...');
-      const data = await supabase(`/rest/v1/offers?token=eq.${token}&select=*`);
-      dbg('Got data: ' + JSON.stringify(data).slice(0,100));
-      if (!data || data.length === 0) { setState('state-error'); return; }
-      const o = data[0];
 
-      const expiresAt = new Date(o.valid_until);
-      expiresAt.setHours(23, 59, 59, 999);
-      if (expiresAt < new Date()) { setState('state-error'); return; }
+    supabaseCall('/rest/v1/offers?token=eq.' + token + '&select=*')
+      .then(function(data) {
+        if (!data || data.length === 0) { setState('state-error'); return; }
+        var o = data[0];
 
-      document.getElementById('contact-name').textContent = o.contact;
-      document.getElementById('company-name').textContent = o.company;
-      const validStr = new Date(o.valid_until).toLocaleDateString('fi-FI');
-      document.getElementById('valid-until-top').textContent = validStr;
-      document.getElementById('offer-ref').textContent = o.id.slice(0,8).toUpperCase();
+        var expiresAt = new Date(o.valid_until);
+        expiresAt.setHours(23, 59, 59, 999);
+        if (expiresAt < new Date()) { setState('state-error'); return; }
 
-      const setupFee = o.setup_fee ?? 1490;
-      const perMeeting = o.per_meeting_fee ?? 249;
-      const minimum = o.monthly_minimum ?? 1490;
+        document.getElementById('contact-name').textContent = o.contact;
+        document.getElementById('company-name').textContent = o.company;
+        document.getElementById('valid-until-top').textContent = new Date(o.valid_until).toLocaleDateString('fi-FI');
+        document.getElementById('offer-ref').textContent = o.id.slice(0,8).toUpperCase();
 
-      document.getElementById('per-meeting-price').textContent = fmt(perMeeting);
-      document.getElementById('setup-fee-price').textContent = fmt(setupFee);
-      document.getElementById('minimum-text').textContent = '* Minimiveloitus ' + fmt(minimum) + '/kk (+ alv)';
+        var setupFee = o.setup_fee || 1490;
+        var perMeeting = o.per_meeting_fee || 249;
+        var minimum = o.monthly_minimum || 1490;
 
-      if (setupFee < 1490) {
-        const disc = document.getElementById('setup-discount');
-        disc.style.display = 'inline-block';
-        disc.textContent = 'Alennettu 1 490€ → ' + fmt(setupFee);
-      }
+        document.getElementById('per-meeting-price').textContent = fmt(perMeeting);
+        document.getElementById('setup-fee-price').textContent = fmt(setupFee);
+        document.getElementById('minimum-text').textContent = '* Minimiveloitus ' + fmt(minimum) + '/kk (+ alv)';
 
-      const slider = document.getElementById('meetings-slider');
-      function updateCalc() {
-        const m = parseInt(slider.value);
-        document.getElementById('meetings-val').textContent = m;
-        const meetCost = m * perMeeting;
-        const base = Math.max(meetCost, minimum);
-        const totalVat = base * (1 + VAT);
-        document.getElementById('result-meetings').textContent = fmt(meetCost);
-        document.getElementById('result-minimum').textContent = fmt(minimum);
-        document.getElementById('result-total').textContent = fmt(totalVat);
-        document.getElementById('result-total').style.color = meetCost < minimum ? 'var(--gray-400)' : 'var(--blue)';
-      }
-      slider.addEventListener('input', updateCalc);
-      updateCalc();
-
-      document.getElementById('f-method').addEventListener('change', function() {
-        document.getElementById('einvoice-group').style.display = this.value === 'einvoice' ? 'flex' : 'none';
-      });
-
-      document.getElementById('btn-ask').addEventListener('click', () => {
-        location.href = 'mailto:info@leadnord.com?subject=Kysymys tarjouksesta ' + o.id.slice(0,8).toUpperCase() + '&body=Hei,%0A%0AMinulla on kysymys tarjouksestanne.%0A%0ATerveisin,%0A' + o.contact;
-      });
-
-      document.getElementById('btn-accept').addEventListener('click', async () => {
-        const company = document.getElementById('f-company').value.trim();
-        const bid = document.getElementById('f-bid').value.trim();
-        const email = document.getElementById('f-email').value.trim();
-        const method = document.getElementById('f-method').value;
-        if (!company || !bid || !email || !method) {
-          alert('Täytä pakolliset kentät (yritys, Y-tunnus, sähköposti, laskutustapa).');
-          return;
+        if (setupFee < 1490) {
+          var disc = document.getElementById('setup-discount');
+          disc.style.display = 'inline-block';
+          disc.textContent = 'Alennettu 1 490€ → ' + fmt(setupFee);
         }
-        const btn = document.getElementById('btn-accept');
-        btn.disabled = true;
-        btn.textContent = 'Lähetetään...';
-        try {
-          await supabase(`/rest/v1/offers?id=eq.${o.id}`, {
+
+        var slider = document.getElementById('meetings-slider');
+        function updateCalc() {
+          var m = parseInt(slider.value);
+          document.getElementById('meetings-val').textContent = m;
+          var meetCost = m * perMeeting;
+          var base = Math.max(meetCost, minimum);
+          var totalVat = base * (1 + VAT);
+          document.getElementById('result-meetings').textContent = fmt(meetCost);
+          document.getElementById('result-minimum').textContent = fmt(minimum);
+          document.getElementById('result-total').textContent = fmt(totalVat);
+          document.getElementById('result-total').style.color = meetCost < minimum ? 'var(--gray-400)' : 'var(--blue)';
+        }
+        slider.addEventListener('input', updateCalc);
+        updateCalc();
+
+        document.getElementById('f-method').addEventListener('change', function() {
+          document.getElementById('einvoice-group').style.display = this.value === 'einvoice' ? 'flex' : 'none';
+        });
+
+        document.getElementById('btn-ask').addEventListener('click', function() {
+          window.location.href = 'mailto:info@leadnord.com?subject=Kysymys tarjouksesta ' + o.id.slice(0,8).toUpperCase() + '&body=Hei,%0A%0AMinulla on kysymys tarjouksestanne.%0A%0ATerveisin,%0A' + o.contact;
+        });
+
+        document.getElementById('btn-accept').addEventListener('click', function() {
+          var company = document.getElementById('f-company').value.trim();
+          var bid = document.getElementById('f-bid').value.trim();
+          var email = document.getElementById('f-email').value.trim();
+          var method = document.getElementById('f-method').value;
+          if (!company || !bid || !email || !method) {
+            alert('Täytä pakolliset kentät (yritys, Y-tunnus, sähköposti, laskutustapa).');
+            return;
+          }
+          var btn = document.getElementById('btn-accept');
+          btn.disabled = true;
+          btn.textContent = 'Lähetetään...';
+          supabaseCall('/rest/v1/offers?id=eq.' + o.id, {
             method: 'PATCH',
             headers: { 'Prefer': 'return=minimal' },
             body: JSON.stringify({
@@ -581,5 +585,27 @@
               billing_address: document.getElementById('f-address').value.trim(),
               billing_reference: document.getElementById('f-ref').value.trim()
             })
+          }).then(function() {
+            logEvent(o.id, 'accepted');
+            setState('state-success');
+          }).catch(function(e) {
+            btn.disabled = false;
+            btn.textContent = 'Hyväksy ja lähetä →';
+            alert('Virhe lähetyksessä. Yritä uudelleen tai ota yhteyttä info@leadnord.com');
           });
-          await logEvent(o.id, 'accep
+        });
+
+        startCountdown(expiresAt);
+        setState('state-offer');
+        logEvent(o.id, 'opened');
+      })
+      .catch(function(e) {
+        console.error('Init error:', e);
+        setState('state-error');
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', runInit);
+</script>
+</body>
+</html>
