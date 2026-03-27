@@ -21,154 +21,171 @@
     --gray-400: #9a9690;
     --gray-600: #5a5753;
   }
-  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--navy); min-height: 100vh; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--gray-100); color: var(--navy); min-height: 100vh; }
 
-  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; background: var(--white); border-bottom: 1px solid var(--gray-200); }
-  .logo { font-family: 'DM Serif Display', serif; font-size: 20px; letter-spacing: -0.02em; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+  /* WRAPPER - ei fullwidth */
+  .page-wrap { max-width: 900px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* TOPBAR */
+  .topbar { background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; margin-bottom: 12px; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -0.02em; color: var(--navy); display: flex; align-items: center; gap: 7px; }
   .logo-arrow { color: var(--blue); }
-  .logo-tag { font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--gray-400); letter-spacing: 0.08em; text-transform: uppercase; margin-left: 4px; }
+  .logo-tag { font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--gray-400); letter-spacing: 0.08em; text-transform: uppercase; }
   .validity-badge { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--gray-400); }
   .validity-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
   .validity-badge strong { color: var(--navy); font-weight: 500; }
 
-  .confidential-bar { background: var(--blue-light); border-bottom: 1px solid #d0d8fc; padding: 10px 48px; margin-top: 57px; display: flex; align-items: center; gap: 10px; }
-  .confidential-bar svg { width: 14px; height: 14px; stroke: var(--blue); flex-shrink: 0; }
+  /* CONFIDENTIAL BAR */
+  .confidential-bar { background: var(--blue-light); border: 1px solid #d0d8fc; border-radius: 6px; padding: 10px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .confidential-bar svg { width: 13px; height: 13px; stroke: var(--blue); flex-shrink: 0; }
   .confidential-bar p { font-size: 12px; color: var(--blue); }
 
-  .hero { padding: 64px 48px 72px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 64px; align-items: center; }
-  .hero-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; font-weight: 500; }
-  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(36px, 5vw, 60px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 8px; }
+  /* COUNTDOWN */
+  .countdown-bar { background: var(--navy); border-radius: 6px; padding: 12px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
+  .countdown-label { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; }
+  .countdown-timer { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--white); letter-spacing: 0.02em; }
+  .countdown-timer span { font-family: 'DM Sans', sans-serif; font-size: 11px; color: rgba(255,255,255,0.4); margin-left: 3px; margin-right: 8px; }
+
+  /* HERO CARD */
+  .hero-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 40px; margin-bottom: 12px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+  .hero-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; font-weight: 500; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4.5vw, 52px); line-height: 1.06; letter-spacing: -0.02em; }
   .hero h1 em { font-style: italic; color: var(--gray-400); }
-  .hero-sub { font-size: 16px; color: var(--gray-600); margin-top: 20px; line-height: 1.65; }
+  .hero-sub { font-size: 15px; color: var(--gray-600); margin-top: 16px; line-height: 1.65; max-width: 440px; }
   .hero-contact { text-align: center; flex-shrink: 0; }
-  .hero-contact img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 12px; }
+  .hero-contact img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 10px; }
+  .hero-contact-role { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
   .hero-contact-name { font-size: 14px; font-weight: 500; color: var(--navy); }
-  .hero-contact-title { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
-  .hero-contact-email { font-size: 12px; color: var(--blue); margin-top: 6px; text-decoration: none; }
+  .hero-contact-tagline { font-size: 12px; color: var(--gray-400); margin-top: 6px; line-height: 1.5; max-width: 160px; font-style: italic; }
+  .hero-contact-email { display: block; font-size: 12px; color: var(--blue); margin-top: 8px; text-decoration: none; }
 
-  .divider { width: 100%; height: 1px; background: var(--gray-200); max-width: 1100px; margin: 0 auto; }
-  .section { max-width: 1100px; margin: 0 auto; padding: 56px 48px; }
-  .section-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 32px; font-weight: 500; }
+  /* CARD BASE */
+  .card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+  .card-pad { padding: 32px 40px; }
+  .section-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 24px; font-weight: 500; }
 
-  .pricing-card { border: 1px solid var(--gray-200); border-radius: 3px; overflow: hidden; }
-  .pricing-header { background: var(--navy); color: white; padding: 40px 48px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; }
-  .pricing-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
-  .pricing-main-price { font-family: 'DM Serif Display', serif; font-size: 52px; line-height: 1; color: white; }
-  .pricing-main-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 6px; }
-  .pricing-teal { color: var(--teal); font-size: 13px; margin-top: 16px; }
-  .pricing-minimum { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+  /* PRICING HEADER */
+  .pricing-header { background: var(--navy); border-left: 4px solid var(--blue); color: white; padding: 36px 40px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; }
+  .pricing-eyebrow { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+  .pricing-main-price { font-family: 'DM Serif Display', serif; font-size: 48px; line-height: 1; color: white; }
+  .pricing-main-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 5px; }
+  .pricing-teal { color: var(--teal); font-size: 13px; margin-top: 14px; }
+  .pricing-minimum { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 6px; }
+  .pricing-vat { font-size: 10px; color: rgba(255,255,255,0.25); margin-top: 3px; }
   .pricing-right { text-align: right; }
-  .pricing-setup-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
-  .pricing-setup-fee { font-family: 'DM Serif Display', serif; font-size: 36px; color: white; line-height: 1; }
-  .pricing-setup-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .pricing-setup-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+  .pricing-setup-fee { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--blue); line-height: 1; }
+  .pricing-setup-vat { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 3px; }
+  .pricing-setup-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 3px; }
   .setup-discount { display: inline-block; margin-top: 8px; background: rgba(0,229,160,0.15); color: var(--teal); font-size: 11px; padding: 3px 10px; border-radius: 100px; border: 1px solid rgba(0,229,160,0.3); }
 
+  /* FEATURES */
   .features-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--gray-200); }
-  .feature-col { padding: 32px 40px; border-right: 1px solid var(--gray-200); }
+  .feature-col { padding: 28px 32px; border-right: 1px solid var(--gray-200); }
   .feature-col:last-child { border-right: none; }
-  .feature-col-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 16px; }
-  .feature-item { font-size: 14px; color: var(--gray-600); padding: 5px 0; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; gap: 10px; }
+  .feature-col-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 14px; }
+  .feature-item { font-size: 13px; color: var(--gray-600); padding: 5px 0; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; gap: 9px; }
   .feature-item:last-child { border-bottom: none; }
-  .feature-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+  .feature-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
 
-  .calc-section { background: var(--gray-100); padding: 40px 48px; border-top: 1px solid var(--gray-200); }
-  .calc-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 28px; }
-  .calc-row { display: flex; align-items: center; gap: 24px; margin-bottom: 28px; }
-  .calc-question { font-size: 14px; color: var(--gray-600); min-width: 260px; }
-  .calc-slider-wrap { flex: 1; display: flex; align-items: center; gap: 16px; }
+  /* CALCULATOR */
+  .calc-section { background: var(--gray-100); padding: 32px 40px; border-top: 1px solid var(--gray-200); }
+  .calc-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 24px; }
+  .calc-row { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
+  .calc-question { font-size: 13px; color: var(--gray-600); min-width: 220px; }
+  .calc-slider-wrap { flex: 1; display: flex; align-items: center; gap: 14px; }
   input[type=range] { flex: 1; -webkit-appearance: none; height: 2px; background: var(--gray-200); outline: none; }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 0 0 1px var(--blue); }
-  .slider-val { font-family: 'DM Serif Display', serif; font-size: 26px; min-width: 50px; text-align: right; color: var(--navy); }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--blue); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 0 0 1px var(--blue); }
+  .slider-val { font-family: 'DM Serif Display', serif; font-size: 24px; min-width: 44px; text-align: right; color: var(--navy); }
   .calc-result { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
-  .calc-result-item { background: var(--white); padding: 24px 28px; }
-  .calc-result-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 6px; }
-  .calc-result-value { font-family: 'DM Serif Display', serif; font-size: 28px; line-height: 1; color: var(--navy); }
+  .calc-result-item { background: var(--white); padding: 20px 24px; }
+  .calc-result-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 5px; }
+  .calc-result-value { font-family: 'DM Serif Display', serif; font-size: 24px; line-height: 1; color: var(--navy); }
   .calc-result-value.total { color: var(--blue); }
+  .calc-vat-note { font-size: 11px; color: var(--gray-400); margin-top: 10px; }
 
-  /* ONBOARDING STEPS */
-  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); margin-bottom: 32px; }
-  .step-item { background: var(--white); padding: 28px 24px; position: relative; }
-  .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--blue-light); color: var(--blue); font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  /* STEPS */
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
+  .step-item { background: var(--white); padding: 24px 20px; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--blue-light); color: var(--blue); font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
   .step-title { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
   .step-desc { font-size: 12px; color: var(--gray-400); line-height: 1.5; }
-  .step-item.active .step-num { background: var(--blue); color: white; }
-  .calendly-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: white; padding: 14px 28px; border-radius: 2px; font-size: 14px; font-weight: 500; text-decoration: none; transition: opacity 0.15s; }
-  .calendly-btn:hover { opacity: 0.88; }
-  .calendly-btn svg { width: 16px; height: 16px; stroke: white; }
 
   /* BILLING */
-  .billing-section { padding: 56px 48px; max-width: 1100px; margin: 0 auto; }
-  .billing-card { border: 1px solid var(--gray-200); border-radius: 3px; padding: 40px 48px; }
-  .billing-intro { font-size: 15px; color: var(--gray-600); margin-bottom: 32px; line-height: 1.6; max-width: 560px; }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .billing-intro { font-size: 14px; color: var(--gray-600); margin-bottom: 28px; line-height: 1.6; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .form-full { grid-column: 1 / -1; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); font-weight: 500; }
-  .form-input { padding: 12px 16px; border: 1px solid var(--gray-200); border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--navy); background: var(--white); outline: none; transition: border-color 0.15s; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); font-weight: 500; }
+  .form-input { padding: 11px 14px; border: 1px solid var(--gray-200); border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--navy); background: var(--white); outline: none; transition: border-color 0.15s; }
   .form-input:focus { border-color: var(--blue); }
   .form-input::placeholder { color: var(--gray-400); }
-  .form-select { padding: 12px 16px; border: 1px solid var(--gray-200); border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--navy); background: var(--white); outline: none; cursor: pointer; appearance: none; }
-  .form-hint { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
-  .cta-row { display: flex; align-items: center; justify-content: space-between; gap: 32px; margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--gray-200); }
-  .cta-left p { font-size: 13px; color: var(--gray-400); line-height: 1.5; max-width: 400px; }
+  .form-select { padding: 11px 14px; border: 1px solid var(--gray-200); border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--navy); background: var(--white); outline: none; cursor: pointer; appearance: none; }
+  .form-hint { font-size: 11px; color: var(--gray-400); }
+  .cta-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--gray-200); }
+  .cta-left p { font-size: 12px; color: var(--gray-400); line-height: 1.55; max-width: 380px; }
   .cta-left a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
-  .cta-buttons { display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
-  .btn-primary { background: var(--blue); color: white; border: none; padding: 14px 36px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 2px; transition: opacity 0.15s; }
+  .cta-buttons { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+  .btn-primary { background: var(--blue); color: white; border: none; padding: 13px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 4px; transition: opacity 0.15s; }
   .btn-primary:hover { opacity: 0.88; }
   .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
-  .btn-secondary { background: none; border: 1px solid var(--gray-200); padding: 14px 24px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--gray-600); cursor: pointer; border-radius: 2px; transition: border-color 0.15s; }
+  .btn-secondary { background: none; border: 1px solid var(--gray-200); padding: 13px 20px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--gray-600); cursor: pointer; border-radius: 4px; transition: border-color 0.15s; }
   .btn-secondary:hover { border-color: var(--gray-400); }
 
   /* COMPANY FOOTER */
-  .company-bar { background: var(--navy); color: rgba(255,255,255,0.5); padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
-  .company-bar strong { color: white; font-weight: 500; }
-  .company-bar a { color: rgba(255,255,255,0.5); text-decoration: none; }
-  .company-bar a:hover { color: white; }
+  .company-footer { background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--gray-400); margin-top: 12px; }
+  .company-footer strong { color: var(--navy); font-weight: 500; }
+  .company-footer a { color: var(--gray-400); text-decoration: none; }
+  .company-footer a:hover { color: var(--blue); }
 
   /* MODAL */
   .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(14,19,32,0.55); z-index: 200; align-items: center; justify-content: center; padding: 24px; }
   .modal-backdrop.open { display: flex; }
-  .modal { background: var(--white); border-radius: 4px; max-width: 560px; width: 100%; padding: 40px; max-height: 80vh; overflow-y: auto; }
-  .modal h2 { font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 20px; }
-  .modal-term { margin-bottom: 16px; }
-  .modal-term h3 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); font-weight: 500; margin-bottom: 4px; }
+  .modal { background: var(--white); border-radius: 8px; max-width: 540px; width: 100%; padding: 36px; max-height: 82vh; overflow-y: auto; }
+  .modal h2 { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 18px; }
+  .modal-term { margin-bottom: 14px; }
+  .modal-term h3 { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); font-weight: 500; margin-bottom: 4px; }
   .modal-term p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
-  .modal-close { display: block; margin-top: 28px; width: 100%; padding: 12px; background: var(--navy); color: white; border: none; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; border-radius: 2px; }
+  .modal-close { display: block; margin-top: 24px; width: 100%; padding: 12px; background: var(--navy); color: white; border: none; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; border-radius: 4px; }
 
   /* STATES */
   .state { display: none; min-height: 100vh; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 48px; }
   .state.active { display: flex; }
-  .spinner { width: 28px; height: 28px; border: 2px solid var(--gray-200); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 20px; }
+  .spinner { width: 26px; height: 26px; border: 2px solid var(--gray-200); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 20px; }
   @keyframes spin { to { transform: rotate(360deg); } }
   #state-loading p { font-size: 14px; color: var(--gray-400); }
   .success-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--teal-light); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
   .success-icon svg { width: 24px; height: 24px; stroke: #00b37e; }
-  #state-success h2 { font-family: 'DM Serif Display', serif; font-size: 32px; margin-bottom: 10px; }
-  #state-success p { font-size: 15px; color: var(--gray-400); max-width: 400px; line-height: 1.6; margin-bottom: 8px; }
-  #state-error h2 { font-family: 'DM Serif Display', serif; font-size: 28px; margin-bottom: 10px; }
-  #state-error p { font-size: 14px; color: var(--gray-400); max-width: 340px; line-height: 1.6; }
+  #state-success h2 { font-family: 'DM Serif Display', serif; font-size: 30px; margin-bottom: 10px; }
+  #state-success p { font-size: 14px; color: var(--gray-400); max-width: 380px; line-height: 1.6; margin-bottom: 6px; }
+  .calendly-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: white; padding: 14px 28px; border-radius: 4px; font-size: 14px; font-weight: 500; text-decoration: none; transition: opacity 0.15s; margin-top: 20px; }
+  .calendly-btn:hover { opacity: 0.88; }
+  .calendly-btn svg { width: 16px; height: 16px; stroke: white; fill: none; }
+  #state-error h2 { font-family: 'DM Serif Display', serif; font-size: 26px; margin-bottom: 10px; }
+  #state-error p { font-size: 14px; color: var(--gray-400); max-width: 320px; line-height: 1.6; }
   #state-offer { display: none; }
   #state-offer.active { display: block; }
 
-  @media (max-width: 768px) {
-    .topbar { padding: 14px 20px; }
-    .confidential-bar { padding: 8px 20px; }
-    .hero { padding: 48px 20px 56px; grid-template-columns: 1fr; gap: 32px; }
-    .hero-contact { display: flex; align-items: center; gap: 16px; text-align: left; }
+  @media (max-width: 700px) {
+    .page-wrap { padding: 16px 12px 48px; }
+    .topbar { padding: 12px 16px; }
+    .hero-card { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+    .hero-contact { display: flex; align-items: center; gap: 14px; text-align: left; }
     .hero-contact img { width: 72px; height: 72px; margin: 0; }
-    .section, .billing-section { padding: 40px 20px; }
-    .pricing-header { grid-template-columns: 1fr; padding: 28px 24px; }
-    .pricing-right { text-align: left; margin-top: 24px; }
+    .hero-contact-tagline { max-width: none; }
+    .card-pad { padding: 24px 20px; }
+    .pricing-header { grid-template-columns: 1fr; padding: 24px 20px; }
+    .pricing-right { text-align: left; margin-top: 20px; }
     .features-row { grid-template-columns: 1fr; }
-    .feature-col { border-right: none; border-bottom: 1px solid var(--gray-200); padding: 24px; }
-    .calc-section { padding: 28px 20px; }
+    .feature-col { border-right: none; border-bottom: 1px solid var(--gray-200); padding: 20px; }
+    .calc-section { padding: 24px 20px; }
     .calc-row { flex-direction: column; align-items: flex-start; gap: 10px; }
     .calc-result { grid-template-columns: 1fr; }
     .steps-grid { grid-template-columns: 1fr 1fr; }
-    .billing-card { padding: 28px 20px; }
     .form-grid { grid-template-columns: 1fr; }
     .cta-row { flex-direction: column; align-items: flex-start; }
-    .company-bar { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+    .company-footer { flex-direction: column; gap: 6px; text-align: center; padding: 14px; }
+    .countdown-bar { flex-direction: column; gap: 4px; text-align: center; padding: 10px 16px; }
   }
 </style>
 </head>
@@ -185,8 +202,9 @@
 </div>
 
 <div id="state-offer">
+<div class="page-wrap">
 
-  <header class="topbar">
+  <div class="topbar">
     <div class="logo">
       <span class="logo-arrow">↗</span>
       Leadnord
@@ -194,9 +212,9 @@
     </div>
     <div class="validity-badge">
       <div class="validity-dot"></div>
-      Voimassa <strong id="valid-until">—</strong> asti
+      Voimassa <strong id="valid-until-top">—</strong> asti
     </div>
-  </header>
+  </div>
 
   <div class="confidential-bar">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -205,130 +223,128 @@
     <p>Tämä tarjous on laadittu henkilökohtaisesti sinulle — se ei ole julkinen eikä näy hakukoneissa. Älä jaa linkkiä eteenpäin.</p>
   </div>
 
-  <section class="hero">
-    <div>
+  <div class="countdown-bar">
+    <div class="countdown-label">Tarjous voimassa vielä</div>
+    <div class="countdown-timer" id="countdown">— <span>pv</span> — <span>h</span> — <span>min</span> — <span>s</span></div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero">
       <p class="hero-label">Henkilökohtainen tarjous</p>
       <h1>Hyvä <em id="contact-name">—</em>,<br>tässä on tarjouksemme<br><em id="company-name">—</em>:lle.</h1>
-      <p class="hero-sub">Kävimme läpi tilanteenne ja myyntiprosessinne. Alla räätälöity ehdotus joka sopii teidän tavoitteisiinne.</p>
+      <p class="hero-sub">Leadnord rakentaa outbound-systeemin joka tuo teidän kalenteriin laadukkaita myyntitapaamisia — kuukaudesta toiseen. Olemme erikoistuneet pohjoismaiseen B2B-markkinaan ja tiedämme miten suomalaiset päättäjät tavoitetaan. Alla on ehdotus teidän tilanteenne pohjalta.</p>
     </div>
     <div class="hero-contact">
       <img src="data:image/jpeg;base64,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AAABAAAAAAAAPMFOALIEBSx6AAAAAACAAAAAAJLPBGOAAAMIAAAAAAAABAAAAAANPFMECACAAAAAAAAAAAJAAAAAJPNFKDGAAAAAAAAAAAAAEMBCCEPEJAIAAAAAAAP/2gAMAwEAAgADAAAAEAAAAAAAABtzXfbbbyiAAAAAAAAAAAABDvfffffffffbagAAAAAAAAACL/fffee+9fffffbQAAAAAAAHPffffYZFFHBtfffffQAAAAAEPffffeRBJPGIMvfffffSAAABNfffffZkCPEHHHP/AH3332kAABb33333tAywSjAihr3333304AD333331ZDRyiyhjzj3333330Ab333332ZgCShwDwCzX333332K/wB99999m4w8UUAsAAV999999PV999999U480csYQgc/9999995d999999ekAIQ00oMI1999999999999997oIIQ8kU00199999991999999tqocg04A0c99999999199999995UcIQEoUI9999999tz999999994c4Isg4X9999999yS9999999+kQAM4Esd9999999KQ9999999gksokgsO99999999gAy99993AAA0cggM89999999yAAA193SAAAAw88Mos719999pAAAAASAAAAAAA0oAIkgAWz99gAAAAAAAAAAAAAAI4Y88AAAEgAAAAAAAwAAAAAAQ88osgIAAwAAAAAAAAAAwMAAAAA80UYswAAAAAAAAAAAAAQQIEAQIcsAgAAAAAAA//EABsRAAIDAQEBAAAAAAAAAAAAAAEwESBAAFBg/9oACAECAQE/AER0WjofDIxT0651DEUBQeLlJxC5wnhc4TiDzpOo+CEjAEHgg3CTgCxWcJvK5ZL56fqv/8QAFBEBAAAAAAAAAAAAAAAAAAAAkP/aAAgBAwEBPwAcf//EAEIQAAEDAgMDCQUGBQMEAwAAAAEAAgMEERIhMRMwUQUQICIyQEFhcRQjUoGRM0JiobHRBiRyweE0Q4IVUGPwNVPC/9oACAEBAAE/Au5CN7tGlNpXHXJCkbbNxuvZ4+C2bPgb9EMm4Rpw57m1rmy2bPgb9FsI73wr2VttTdOpD9118vFGGQfdOl8v+xNY52gTaT4nfRNhYzQb90bH9oXTqT4XfVPhey+WQ8R31kT36BMpmDXNad0dBG4dmx4hPpntzHWH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" alt="Miika Pihlajaharju">
+      <div class="hero-contact-role">Yhteyshenkilösi</div>
       <div class="hero-contact-name">Miika Pihlajaharju</div>
-      <div class="hero-contact-title">Leadnord</div>
-      <a href="mailto:info@leadnord.com" class="hero-contact-email">info@leadnord.com</a>
+      <div class="hero-contact-tagline">Odotan innolla, että pääsemme rakentamaan kasvua yhdessä.</div>
+      <a href="/cdn-cgi/l/email-protection#0861666e6748646d696c66677a6c266b6765" class="hero-contact-email"><span class="__cf_email__" data-cfemail="e58c8b838aa5898084818b8a9781cb868a88">[email&#160;protected]</span></a>
     </div>
-  </section>
+  </div>
 
-  <div class="divider"></div>
-
-  <section class="section">
-    <p class="section-label">Hinnoittelu</p>
-    <div class="pricing-card">
-      <div class="pricing-header">
-        <div>
-          <div class="pricing-title">Per buukattu tapaaminen</div>
-          <div class="pricing-main-price" id="per-meeting-price">249€</div>
-          <div class="pricing-main-label">per vahvistettu myyntitapaaminen</div>
-          <div class="pricing-teal">Maksat vain tuloksista.</div>
-          <div class="pricing-minimum" id="minimum-text">* Minimiveloitus 1 490€/kk</div>
-        </div>
-        <div class="pricing-right">
-          <div class="pricing-setup-label">Aloitusmaksu</div>
-          <div class="pricing-setup-fee" id="setup-fee-price">1 490€</div>
-          <div class="pricing-setup-sub">kertaluonteinen</div>
-          <div class="setup-discount" id="setup-discount" style="display:none"></div>
-        </div>
+  <div class="card">
+    <div class="pricing-header">
+      <div>
+        <div class="pricing-eyebrow">Per buukattu tapaaminen</div>
+        <div class="pricing-main-price" id="per-meeting-price">249€</div>
+        <div class="pricing-main-label">per vahvistettu myyntitapaaminen</div>
+        <div class="pricing-vat" id="per-meeting-vat">+ alv 25,5%</div>
+        <div class="pricing-teal">Maksat vain tuloksista.</div>
+        <div class="pricing-minimum" id="minimum-text">* Minimiveloitus 1 490€/kk (+ alv)</div>
       </div>
-      <div class="features-row">
-        <div class="feature-col">
-          <div class="feature-col-label">Outreach</div>
-          <div class="feature-item"><span class="feature-dot"></span>Räätälöidyt email-sekvenssit</div>
-          <div class="feature-item"><span class="feature-dot"></span>A/B-testaus viesteille</div>
-          <div class="feature-item"><span class="feature-dot"></span>Puhelinbuukkaus</div>
-          <div class="feature-item"><span class="feature-dot"></span>Vapaa kohderyhmien valinta</div>
-        </div>
-        <div class="feature-col">
-          <div class="feature-col-label">Hallinta</div>
-          <div class="feature-item"><span class="feature-dot"></span>Kalenterinhallinta</div>
-          <div class="feature-item"><span class="feature-dot"></span>Siirtyneiden uudelleenorganisointi</div>
-          <div class="feature-item"><span class="feature-dot"></span>Dedikoitu account manager</div>
-          <div class="feature-item"><span class="feature-dot"></span>Onboarding 2 viikossa</div>
-        </div>
-        <div class="feature-col">
-          <div class="feature-col-label">Raportointi</div>
-          <div class="feature-item"><span class="feature-dot"></span>Viikkoraportti</div>
-          <div class="feature-item"><span class="feature-dot"></span>KPI-seuranta</div>
-          <div class="feature-item"><span class="feature-dot"></span>Kuukausikatsaus</div>
-          <div class="feature-item"><span class="feature-dot"></span>3 kuukauden sopimus</div>
-        </div>
-      </div>
-      <div class="calc-section">
-        <div class="calc-label">Laske arvioitu kuukausikustannus</div>
-        <div class="calc-row">
-          <div class="calc-question">Kuinka monta tapaamista tavoittelet kuukaudessa?</div>
-          <div class="calc-slider-wrap">
-            <input type="range" id="meetings-slider" min="1" max="40" value="10" step="1">
-            <div class="slider-val" id="meetings-val">10</div>
-          </div>
-        </div>
-        <div class="calc-result">
-          <div class="calc-result-item">
-            <div class="calc-result-label">Tapaamismaksu</div>
-            <div class="calc-result-value" id="result-meetings">2 490€</div>
-          </div>
-          <div class="calc-result-item">
-            <div class="calc-result-label">Minimiveloitus</div>
-            <div class="calc-result-value" id="result-minimum">1 490€</div>
-          </div>
-          <div class="calc-result-item">
-            <div class="calc-result-label">Veloitetaan / kk</div>
-            <div class="calc-result-value total" id="result-total">2 490€</div>
-          </div>
-        </div>
+      <div class="pricing-right">
+        <div class="pricing-setup-label">Aloitusmaksu</div>
+        <div class="pricing-setup-fee" id="setup-fee-price">1 490€</div>
+        <div class="pricing-setup-vat">+ alv 25,5%</div>
+        <div class="pricing-setup-sub">kertaluonteinen</div>
+        <div class="setup-discount" id="setup-discount" style="display:none"></div>
       </div>
     </div>
-  </section>
 
-  <div class="divider"></div>
-
-  <section class="section">
-    <p class="section-label">Miten edetään</p>
-    <div class="steps-grid">
-      <div class="step-item active">
-        <div class="step-num">1</div>
-        <div class="step-title">Hyväksy tarjous</div>
-        <div class="step-desc">Täytä laskutustiedot alla — lähetämme laskun 24h sisällä.</div>
+    <div class="features-row">
+      <div class="feature-col">
+        <div class="feature-col-label">Outreach</div>
+        <div class="feature-item"><span class="feature-dot"></span>Räätälöidyt email-sekvenssit</div>
+        <div class="feature-item"><span class="feature-dot"></span>A/B-testaus viesteille</div>
+        <div class="feature-item"><span class="feature-dot"></span>Puhelinbuukkaus</div>
+        <div class="feature-item"><span class="feature-dot"></span>Vapaa kohderyhmien valinta</div>
       </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-title">Aloitusmaksu</div>
-        <div class="step-desc">Työ käynnistyy kun aloitusmaksu on vahvistunut.</div>
+      <div class="feature-col">
+        <div class="feature-col-label">Hallinta</div>
+        <div class="feature-item"><span class="feature-dot"></span>Kalenterinhallinta</div>
+        <div class="feature-item"><span class="feature-dot"></span>Siirtyneiden uudelleenorganisointi</div>
+        <div class="feature-item"><span class="feature-dot"></span>Dedikoitu account manager</div>
+        <div class="feature-item"><span class="feature-dot"></span>Onboarding 2 viikossa</div>
       </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div class="step-title">Onboarding-call</div>
-        <div class="step-desc">60 min yhteinen aloituspuhelu — määritellään ICP, viestit ja tavoitteet.</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">4</div>
-        <div class="step-title">Outreach käynnistyy</div>
-        <div class="step-desc">Ensimmäiset viestit lähtevät 2 viikon sisällä aloitusmaksusta.</div>
+      <div class="feature-col">
+        <div class="feature-col-label">Raportointi</div>
+        <div class="feature-item"><span class="feature-dot"></span>Viikkoraportti</div>
+        <div class="feature-item"><span class="feature-dot"></span>KPI-seuranta</div>
+        <div class="feature-item"><span class="feature-dot"></span>Kuukausikatsaus</div>
+        <div class="feature-item"><span class="feature-dot"></span>3 kuukauden sopimus</div>
       </div>
     </div>
-    <a href="https://calendly.com/leadnord-meeting/onboarding" target="_blank" class="calendly-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-      </svg>
-      Varaa onboarding-aika (60 min)
-    </a>
-  </section>
 
-  <div class="divider"></div>
+    <div class="calc-section">
+      <div class="calc-label">Laske arvioitu kuukausikustannus</div>
+      <div class="calc-row">
+        <div class="calc-question">Kuinka monta tapaamista tavoittelet kuukaudessa?</div>
+        <div class="calc-slider-wrap">
+          <input type="range" id="meetings-slider" min="1" max="40" value="10" step="1">
+          <div class="slider-val" id="meetings-val">10</div>
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="calc-result-item">
+          <div class="calc-result-label">Tapaamismaksu (alv 0%)</div>
+          <div class="calc-result-value" id="result-meetings">2 490€</div>
+        </div>
+        <div class="calc-result-item">
+          <div class="calc-result-label">Minimiveloitus (alv 0%)</div>
+          <div class="calc-result-value" id="result-minimum">1 490€</div>
+        </div>
+        <div class="calc-result-item">
+          <div class="calc-result-label">Yhteensä sis. alv</div>
+          <div class="calc-result-value total" id="result-total">3 128€</div>
+        </div>
+      </div>
+      <div class="calc-vat-note">Hinnat ovat verottomia (alv 0%). Arvonlisävero 25,5% lisätään laskuun.</div>
+    </div>
+  </div>
 
-  <section class="billing-section">
-    <p class="section-label">Hyväksy tarjous</p>
-    <div class="billing-card">
-      <p class="billing-intro">Täytä laskutustietosi alla. Lähetämme laskun 24 tunnin sisällä — työ käynnistyy kun aloitusmaksu on vahvistunut.</p>
+  <div class="card">
+    <div class="card-pad">
+      <p class="section-label">Miten edetään</p>
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-title">Hyväksy tarjous</div>
+          <div class="step-desc">Täytä laskutustiedot — lähetämme laskun 24h sisällä.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-title">Aloitusmaksu</div>
+          <div class="step-desc">Työ käynnistyy kun aloitusmaksu on vahvistunut.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-title">Onboarding-call</div>
+          <div class="step-desc">60 min aloituspuhelu — ICP, viestit ja tavoitteet.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-title">Outreach käynnistyy</div>
+          <div class="step-desc">Ensimmäiset viestit lähtevät 2 viikon sisällä.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-pad">
+      <p class="section-label">Hyväksy tarjous</p>
+      <p class="billing-intro">Täytä laskutustietosi alla. Lähetämme laskun 24 tunnin sisällä — työ käynnistyy kun aloitusmaksu on vahvistunut. Hyväksyttyäsi tarjouksen voit varata onboarding-ajan suoraan seuraavalla sivulla.</p>
       <div class="form-grid">
         <div class="form-group form-full">
           <label class="form-label">Yrityksen virallinen nimi *</label>
@@ -374,21 +390,15 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <footer class="company-bar">
-    <div>
-      <strong>Sentralia Oy</strong> — Y-tunnus 3570381-4
-    </div>
-    <div>
-      Kappelikuja 6, 02200 Espoo &nbsp;·&nbsp;
-      <a href="mailto:info@leadnord.com">info@leadnord.com</a>
-    </div>
-    <div>
-      Viite: <span id="offer-ref">—</span>
-    </div>
-  </footer>
+  <div class="company-footer">
+    <div><strong>Sentralia Oy</strong> — Y-tunnus 3570381-4</div>
+    <div>Kappelikuja 6, 02200 Espoo &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#d1b8bfb7be91bdb4b0b5bfbea3b5ffb2bebc"><span class="__cf_email__" data-cfemail="c4adaaa2ab84a8a1a5a0aaabb6a0eaa7aba9">[email&#160;protected]</span></a></div>
+    <div style="color:var(--gray-400)">Viite: <span id="offer-ref">—</span></div>
+  </div>
 
+</div>
 </div>
 
 <div id="state-success" class="state">
@@ -400,9 +410,9 @@
   <h2>Tarjous hyväksytty.</h2>
   <p>Lähetämme laskun laskutussähköpostiisi 24 tunnin sisällä.</p>
   <p>Työ käynnistyy maksun vahvistuttua.</p>
-  <br>
-  <a href="https://calendly.com/leadnord-meeting/onboarding" target="_blank" class="calendly-btn" style="margin-top:8px">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <p style="margin-top:12px;font-size:14px;color:var(--navy);font-weight:500;">Varaa onboarding-aika nyt — 60 min aloituspuhelu.</p>
+  <a href="https://calendly.com/leadnord-meeting/onboarding" target="_blank" class="calendly-btn">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
     </svg>
     Varaa onboarding-aika
@@ -412,19 +422,42 @@
 <div class="modal-backdrop" id="terms-modal" onclick="if(event.target===this)this.classList.remove('open')">
   <div class="modal">
     <h2>Palveluehdot</h2>
-    <div class="modal-term"><h3>Sopimuspituus</h3><p>Sopimus on voimassa 3 kuukautta aloitusmaksun suorituksesta. Sopimus jatkuu kuukausittain ellei sitä irtisanota 30 päivän kirjallisella ilmoituksella.</p></div>
-    <div class="modal-term"><h3>Hinnoittelu</h3><p>Laskutus perustuu vahvistettuihin myyntitapaamisiin. Minimiveloitus on 1 490€/kk riippumatta tapaamismäärästä. Aloitusmaksu laskutetaan sopimuksen allekirjoituksesta.</p></div>
-    <div class="modal-term"><h3>Tapaamisen määritelmä</h3><p>Tapaaminen on vahvistettu, kalenteroitu myyntikeskustelu asiakkaan ja teidän myyntihenkilönne välillä. Peruuntunut tapaaminen jota ei uudelleenaikatauluteta ei ole laskutettava.</p></div>
-    <div class="modal-term"><h3>Luottamuksellisuus</h3><p>Molemmat osapuolet sitoutuvat pitämään luottamuksellisina kaikki toiselta osapuolelta saamat liikesalaisuudet ja asiakastiedot.</p></div>
-    <div class="modal-term"><h3>Vastuu</h3><p>Leadnord vastaa outreach-toimenpiteiden laadusta ja volyymin tavoittelusta. Emme takaa tiettyä tapaamismäärää, mutta sitoudumme aktiiviseen ja läpinäkyvään tekemiseen viikoittaisine raportointeineen.</p></div>
-    <div class="modal-term"><h3>Sovellettava laki</h3><p>Sopimukseen sovelletaan Suomen lakia. Riidat ratkaistaan ensisijaisesti neuvottelemalla.</p></div>
+    <div class="modal-term">
+      <h3>Sopimuspituus</h3>
+      <p>Sopimus on voimassa 3 kuukautta aloitusmaksun suorituksesta. 3 kuukautta on todettu sopivaksi ajaksi nähdä konkreettisia tuloksia B2B-outreach-toiminnassa — tässä ajassa pipeline ehtii rakentua ja tapaamisia syntyy mitattavasti. Alkuperäisen sopimuskauden jälkeen sopimus jatkuu kuukausittain kunnes jompikumpi osapuoli irtisanoo sen.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Irtisanominen</h3>
+      <p>Sopimuksen voi irtisanoa 30 päivän kirjallisella ilmoituksella sähköpostitse osoitteeseen <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7beb9b1b897bbb2b6b3b9b8a5b3f9b4b8ba">[email&#160;protected]</a>. Irtisanominen astuu voimaan seuraavan laskutuskauden päättyessä.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Hinnoittelu ja arvonlisävero</h3>
+      <p>Laskutus perustuu vahvistettuihin myyntitapaamisiin. Minimiveloitus on 1 490€/kk (alv 0%) riippumatta tapaamismäärästä. Kaikki hinnat ovat verottomia — arvonlisävero 25,5% lisätään laskuun. Aloitusmaksu laskutetaan sopimuksen vahvistuksesta.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Tapaamisen määritelmä</h3>
+      <p>Tapaaminen on vahvistettu, kalenteroitu myyntikeskustelu asiakkaan ja teidän myyntihenkilönne välillä. Peruuntunut tapaaminen jota ei uudelleenaikatauluteta ei ole laskutettava.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Luottamuksellisuus</h3>
+      <p>Molemmat osapuolet sitoutuvat pitämään luottamuksellisina kaikki toiselta osapuolelta saamat liikesalaisuudet ja asiakastiedot.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Vastuu</h3>
+      <p>Leadnord vastaa outreach-toimenpiteiden laadusta ja volyymin tavoittelusta. Emme takaa tiettyä tapaamismäärää, mutta sitoudumme aktiiviseen ja läpinäkyvään tekemiseen viikoittaisine raportointeineen.</p>
+    </div>
+    <div class="modal-term">
+      <h3>Sovellettava laki</h3>
+      <p>Sopimukseen sovelletaan Suomen lakia. Riidat ratkaistaan ensisijaisesti neuvottelemalla.</p>
+    </div>
     <button class="modal-close" onclick="document.getElementById('terms-modal').classList.remove('open')">Sulje</button>
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const SUPABASE_URL = 'https://mqmxmdiecibtvglidsvp.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbXhtZGllY2lidHZnbGlkc3ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2MDE5MzYsImV4cCI6MjA5MDE3NzkzNn0.AZPgdnCnE_AxUNvk1dkSYQ4O6KO01_imfUvLB58KctA';
+  const VAT = 0.255;
 
   function setState(id) {
     ['state-loading','state-error','state-offer','state-success'].forEach(s => {
@@ -433,7 +466,7 @@
     document.getElementById(id).classList.add('active');
   }
 
-  function fmt(n) { return n.toLocaleString('fi-FI') + '€'; }
+  function fmt(n) { return Math.round(n).toLocaleString('fi-FI') + '€'; }
 
   async function supabase(path, opts = {}) {
     const res = await fetch(SUPABASE_URL + path, {
@@ -449,6 +482,21 @@
     catch(e) { console.warn('Event log failed', e); }
   }
 
+  function startCountdown(expiresAt) {
+    const el = document.getElementById('countdown');
+    function tick() {
+      const diff = new Date(expiresAt) - new Date();
+      if (diff <= 0) { el.textContent = 'Tarjous vanhentunut'; return; }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      el.innerHTML = d + '<span>pv</span>' + String(h).padStart(2,'0') + '<span>h</span>' + String(m).padStart(2,'0') + '<span>min</span>' + String(s).padStart(2,'0') + '<span>s</span>';
+    }
+    tick();
+    setInterval(tick, 1000);
+  }
+
   async function init() {
     const token = new URLSearchParams(location.search).get('t') || location.pathname.split('/').pop();
     if (!token || token.length < 8) { setState('state-error'); return; }
@@ -456,11 +504,15 @@
       const data = await supabase(`/rest/v1/offers?token=eq.${token}&select=*`);
       if (!data || data.length === 0) { setState('state-error'); return; }
       const o = data[0];
-      if (new Date(o.valid_until) < new Date()) { setState('state-error'); return; }
+
+      const expiresAt = new Date(o.valid_until);
+      expiresAt.setHours(23, 59, 59, 999);
+      if (expiresAt < new Date()) { setState('state-error'); return; }
 
       document.getElementById('contact-name').textContent = o.contact;
       document.getElementById('company-name').textContent = o.company;
-      document.getElementById('valid-until').textContent = new Date(o.valid_until).toLocaleDateString('fi-FI');
+      const validStr = new Date(o.valid_until).toLocaleDateString('fi-FI');
+      document.getElementById('valid-until-top').textContent = validStr;
       document.getElementById('offer-ref').textContent = o.id.slice(0,8).toUpperCase();
 
       const setupFee = o.setup_fee ?? 1490;
@@ -469,7 +521,7 @@
 
       document.getElementById('per-meeting-price').textContent = fmt(perMeeting);
       document.getElementById('setup-fee-price').textContent = fmt(setupFee);
-      document.getElementById('minimum-text').textContent = '* Minimiveloitus ' + fmt(minimum) + '/kk';
+      document.getElementById('minimum-text').textContent = '* Minimiveloitus ' + fmt(minimum) + '/kk (+ alv)';
 
       if (setupFee < 1490) {
         const disc = document.getElementById('setup-discount');
@@ -482,10 +534,11 @@
         const m = parseInt(slider.value);
         document.getElementById('meetings-val').textContent = m;
         const meetCost = m * perMeeting;
-        const total = Math.max(meetCost, minimum);
+        const base = Math.max(meetCost, minimum);
+        const totalVat = base * (1 + VAT);
         document.getElementById('result-meetings').textContent = fmt(meetCost);
         document.getElementById('result-minimum').textContent = fmt(minimum);
-        document.getElementById('result-total').textContent = fmt(total);
+        document.getElementById('result-total').textContent = fmt(totalVat);
         document.getElementById('result-total').style.color = meetCost < minimum ? 'var(--gray-400)' : 'var(--blue)';
       }
       slider.addEventListener('input', updateCalc);
@@ -525,24 +578,4 @@
               billing_reference: document.getElementById('f-ref').value.trim()
             })
           });
-          await logEvent(o.id, 'accepted');
-          setState('state-success');
-        } catch(e) {
-          btn.disabled = false;
-          btn.textContent = 'Hyväksy ja lähetä →';
-          alert('Virhe lähetyksessä. Yritä uudelleen tai ota yhteyttä info@leadnord.com');
-        }
-      });
-
-      setState('state-offer');
-      await logEvent(o.id, 'opened');
-    } catch(e) {
-      console.error(e);
-      setState('state-error');
-    }
-  }
-
-  init();
-</script>
-</body>
-</html>
+          await logEvent(o.id, 'accep
