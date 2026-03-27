@@ -498,10 +498,14 @@
   }
 
   async function init() {
+    const dbg = (msg) => { document.getElementById('state-loading').querySelector('p').textContent = msg; console.log(msg); };
     const token = new URLSearchParams(location.search).get('t') || location.pathname.split('/').pop();
+    dbg('Token: ' + token);
     if (!token || token.length < 8) { setState('state-error'); return; }
     try {
+      dbg('Fetching from Supabase...');
       const data = await supabase(`/rest/v1/offers?token=eq.${token}&select=*`);
+      dbg('Got data: ' + JSON.stringify(data).slice(0,100));
       if (!data || data.length === 0) { setState('state-error'); return; }
       const o = data[0];
 
