@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>LeadNord — Tarjous</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0a0a;
+    --white: #fafaf8;
+    --gray-100: #f0ede8;
+    --gray-200: #e0ddd8;
+    --gray-400: #9a9690;
+    --gray-600: #5a5753;
+    --accent: #1a3a2a;
+    --accent-light: #e8f0eb;
+    --gold: #c8a96e;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--black); min-height: 100vh; }
+
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: var(--white); border-bottom: 1px solid var(--gray-200); }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 20px; letter-spacing: -0.02em; }
+  .logo span { color: var(--gray-400); font-style: italic; }
+  .validity { font-size: 12px; color: var(--gray-400); letter-spacing: 0.06em; text-transform: uppercase; }
+  .validity strong { color: var(--black); font-weight: 500; }
+
+  .hero { padding: 140px 48px 80px; max-width: 1100px; margin: 0 auto; }
+  .hero-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 24px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(42px, 6vw, 72px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .hero h1 em { font-style: italic; color: var(--gray-400); }
+  .hero-sub { font-size: 16px; color: var(--gray-600); margin-top: 24px; max-width: 480px; line-height: 1.6; }
+
+  .divider { width: 100%; height: 1px; background: var(--gray-200); max-width: 1100px; margin: 0 auto; }
+
+  .section { max-width: 1100px; margin: 0 auto; padding: 64px 48px; }
+  .section-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 40px; }
+
+  .package-card { border: 1px solid var(--gray-200); border-radius: 2px; overflow: hidden; }
+  .package-header { display: grid; grid-template-columns: 1fr auto; align-items: start; padding: 40px 48px; background: var(--accent); color: var(--white); gap: 32px; }
+  .package-name { font-family: 'DM Serif Display', serif; font-size: 36px; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .package-desc { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 340px; line-height: 1.5; }
+  .package-channels { display: flex; gap: 8px; margin-top: 20px; }
+  .channel-pill { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border: 1px solid rgba(255,255,255,0.25); border-radius: 100px; color: rgba(255,255,255,0.7); }
+  .pricing-block { text-align: right; flex-shrink: 0; }
+  .price-monthly-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .price-monthly { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--white); line-height: 1; }
+  .price-per { font-size: 13px; color: var(--gold); margin-top: 12px; }
+
+  .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--gray-200); }
+  .feature-col { padding: 36px 40px; border-right: 1px solid var(--gray-200); }
+  .feature-col:last-child { border-right: none; }
+  .feature-col-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 20px; }
+  .feature-item { font-size: 14px; color: var(--gray-600); padding: 6px 0; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; gap: 10px; }
+  .feature-item:last-child { border-bottom: none; }
+  .feature-item::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  .calc-section { background: var(--gray-100); padding: 48px; border-top: 1px solid var(--gray-200); }
+  .calc-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 32px; }
+  .calc-row { display: flex; align-items: center; gap: 32px; margin-bottom: 32px; }
+  .calc-question { font-size: 15px; color: var(--gray-600); min-width: 280px; }
+  .calc-slider-wrap { flex: 1; display: flex; align-items: center; gap: 16px; }
+  input[type=range] { flex: 1; -webkit-appearance: none; height: 2px; background: var(--gray-200); outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 0 0 1px var(--accent); }
+  .slider-val { font-family: 'DM Serif Display', serif; font-size: 28px; min-width: 60px; text-align: right; }
+  .calc-result { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
+  .calc-result-item { background: var(--white); padding: 28px 32px; }
+  .calc-result-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 8px; }
+  .calc-result-value { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1; }
+  .calc-result-value.total { color: var(--accent); }
+
+  .cta-section { padding: 64px 48px; display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+  .cta-text h2 { font-family: 'DM Serif Display', serif; font-size: 32px; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .cta-text p { font-size: 14px; color: var(--gray-400); }
+  .cta-buttons { display: flex; gap: 16px; align-items: center; flex-shrink: 0; }
+  .btn-primary { background: var(--accent); color: var(--white); border: none; padding: 16px 40px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; cursor: pointer; border-radius: 1px; transition: opacity 0.15s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-secondary { background: none; border: none; font-size: 14px; color: var(--gray-400); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .btn-secondary:hover { color: var(--black); }
+
+  .footer { border-top: 1px solid var(--gray-200); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-size: 12px; color: var(--gray-400); }
+  .footer-right { font-size: 12px; color: var(--gray-400); }
+
+  /* States */
+  .state { display: none; min-height: 100vh; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 48px; }
+  .state.active { display: flex; }
+  #state-loading .spinner { width: 32px; height: 32px; border: 2px solid var(--gray-200); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 24px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #state-loading p { font-size: 14px; color: var(--gray-400); }
+  #state-error h2 { font-family: 'DM Serif Display', serif; font-size: 32px; margin-bottom: 12px; }
+  #state-error p { font-size: 15px; color: var(--gray-400); max-width: 360px; line-height: 1.6; }
+  #state-success h2 { font-family: 'DM Serif Display', serif; font-size: 36px; margin-bottom: 12px; }
+  #state-success p { font-size: 15px; color: var(--gray-400); max-width: 360px; line-height: 1.6; }
+  .success-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin-bottom: 32px; }
+  .success-icon svg { width: 28px; height: 28px; stroke: var(--accent); }
+
+  #state-offer { display: none; }
+  #state-offer.active { display: block; }
+
+  @media (max-width: 768px) {
+    .topbar { padding: 16px 24px; }
+    .hero { padding: 100px 24px 48px; }
+    .section { padding: 40px 24px; }
+    .package-header { grid-template-columns: 1fr; padding: 28px 24px; }
+    .pricing-block { text-align: left; }
+    .features-grid { grid-template-columns: 1fr; }
+    .feature-col { border-right: none; border-bottom: 1px solid var(--gray-200); }
+    .calc-section { padding: 32px 24px; }
+    .calc-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .calc-result { grid-template-columns: 1fr; }
+    .cta-section { flex-direction: column; align-items: flex-start; padding: 40px 24px; }
+    .footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="state-loading" class="state active">
+  <div class="spinner"></div>
+  <p>Ladataan tarjousta...</p>
+</div>
+
+<!-- ERROR -->
+<div id="state-error" class="state">
+  <h2>Tarjousta ei löydy.</h2>
+  <p>Linkki on vanhentunut tai virheellinen. Ota yhteyttä LeadNordiin.</p>
+</div>
+
+<!-- OFFER -->
+<div id="state-offer">
+  <header class="topbar">
+    <div class="logo">LeadNord <span>/ tarjous</span></div>
+    <div class="validity">Voimassa <strong id="valid-until">—</strong> asti</div>
+  </header>
+
+  <section class="hero">
+    <p class="hero-label">Henkilökohtainen tarjous — luottamuksellinen</p>
+    <h1>Hyvä <em id="contact-name">—</em>,<br>tässä tarjouksemme.</h1>
+    <p class="hero-sub">Räätälöity paketti <strong id="company-name">—</strong>:n tilanteeseen.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <p class="section-label">Valittu paketti</p>
+    <div class="package-card">
+      <div class="package-header">
+        <div>
+          <div class="package-name" id="package-name">—</div>
+          <div class="package-desc" id="package-desc">—</div>
+          <div class="package-channels" id="package-channels"></div>
+        </div>
+        <div class="pricing-block">
+          <div class="price-monthly-label">Kuukausimaksu</div>
+          <div class="price-monthly" id="price-monthly">—</div>
+          <div class="price-per" id="price-per">—</div>
+        </div>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-col">
+          <div class="feature-col-label">Outreach</div>
+          <div class="feature-item">Räätälöidyt email-sekvenssit</div>
+          <div class="feature-item">A/B-testaus viesteille</div>
+          <div class="feature-item">Puhelinbuukkaus follow-up</div>
+          <div class="feature-item" id="feat-icp">—</div>
+        </div>
+        <div class="feature-col">
+          <div class="feature-col-label">Hallinta</div>
+          <div class="feature-item">Kalenterinhallinta</div>
+          <div class="feature-item">Siirtyneiden uudelleenorganisointi</div>
+          <div class="feature-item" id="feat-meetings">—</div>
+          <div class="feature-item">Onboarding 2 viikossa</div>
+        </div>
+        <div class="feature-col">
+          <div class="feature-col-label">Raportointi</div>
+          <div class="feature-item">Viikkoraportti</div>
+          <div class="feature-item">KPI-dashboard</div>
+          <div class="feature-item">Kuukausikatsaus</div>
+          <div class="feature-item" id="feat-am">—</div>
+        </div>
+      </div>
+
+      <div class="calc-section">
+        <div class="calc-label">Laske arvioitu kuukausikustannus</div>
+        <div class="calc-row">
+          <div class="calc-question">Kuinka monta tapaamista tavoittelet kuukaudessa?</div>
+          <div class="calc-slider-wrap">
+            <input type="range" id="meetings-slider" min="1" max="35" value="10" step="1">
+            <div class="slider-val" id="meetings-val">10</div>
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-item">
+            <div class="calc-result-label">Kuukausimaksu</div>
+            <div class="calc-result-value" id="result-monthly">—</div>
+          </div>
+          <div class="calc-result-item">
+            <div class="calc-result-label">Tapaamismaksu</div>
+            <div class="calc-result-value" id="result-meetings">—</div>
+          </div>
+          <div class="calc-result-item">
+            <div class="calc-result-label">Yhteensä / kk</div>
+            <div class="calc-result-value total" id="result-total">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section cta-section">
+    <div class="cta-text">
+      <h2>Lähdetäänkö liikkeelle?</h2>
+      <p>Hyväksymällä tarjouksen aloitamme onboardingin 48 tunnin sisällä.</p>
+    </div>
+    <div class="cta-buttons">
+      <button class="btn-secondary" id="btn-ask">Haluan kysyä ensin</button>
+      <button class="btn-primary" id="btn-accept">Hyväksy tarjous →</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-left">LeadNord — luottamuksellinen tarjous — ei julkinen</div>
+    <div class="footer-right">Viite: <span id="offer-ref">—</span></div>
+  </footer>
+</div>
+
+<!-- SUCCESS -->
+<div id="state-success" class="state">
+  <div class="success-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+  <h2>Tarjous hyväksytty.</h2>
+  <p>Olemme yhteydessä teihin seuraavan 48 tunnin sisällä onboardingin käynnistämiseksi.</p>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://mqmxmdiecibtvglidsvp.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbXhtZGllY2lidHZnbGlkc3ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2MDE5MzYsImV4cCI6MjA5MDE3NzkzNn0.AZPgdnCnE_AxUNvk1dkSYQ4O6KO01_imfUvLB58KctA';
+
+  const PACKAGE_META = {
+    'Starter': { desc: 'Puhdas email-outreach. Nopea aloitus, nolla teknistä kitkaa.', channels: ['Email'], icp: '1 ICP-kohderyhmä', meetings: 'Tavoite 4–8 tapaamista/kk', am: 'Kuukausiraportti' },
+    'Growth':  { desc: 'Email-outreach + puhelinbuukkaus. Jatkuva tapaamistahti ilman että teidän pitää huolehtia myynnin alkupäästä.', channels: ['Email', 'Puhelin'], icp: '2 ICP-kohderyhmää', meetings: 'Tavoite 8–15 tapaamista/kk', am: 'Dedikoitu account manager' },
+    'Scale':   { desc: 'Täysi outbound-kone. Email + aktiivinen puhelinbuukkaus, rajoittamaton kohderyhmät.', channels: ['Email', 'Puhelin'], icp: 'Rajoittamaton kohderyhmät', meetings: 'Tavoite 20–35 tapaamista/kk', am: 'Dedikoitu account manager' },
+  };
+
+  function setState(id) {
+    ['state-loading','state-error','state-offer','state-success'].forEach(s => {
+      const el = document.getElementById(s);
+      el.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+  }
+
+  function fmt(n) { return n.toLocaleString('fi-FI') + '€'; }
+
+  async function supabase(path, opts = {}) {
+    const res = await fetch(SUPABASE_URL + path, {
+      ...opts,
+      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Content-Type': 'application/json', ...(opts.headers || {}) }
+    });
+    if (!res.ok) throw new Error(await res.text());
+    return res.status === 204 ? null : res.json();
+  }
+
+  async function logEvent(offerId, event) {
+    try {
+      await supabase('/rest/v1/offer_events', {
+        method: 'POST',
+        body: JSON.stringify({ offer_id: offerId, event })
+      });
+    } catch(e) { console.warn('Event log failed', e); }
+  }
+
+  async function init() {
+    const token = new URLSearchParams(location.search).get('t') || location.pathname.split('/').pop();
+    if (!token || token.length < 8) { setState('state-error'); return; }
+
+    try {
+      const data = await supabase(`/rest/v1/offers?token=eq.${token}&select=*`);
+      if (!data || data.length === 0) { setState('state-error'); return; }
+      const offer = data[0];
+
+      // Check expiry
+      if (new Date(offer.valid_until) < new Date()) { setState('state-error'); return; }
+
+      // Fill UI
+      const meta = PACKAGE_META[offer.package] || {};
+      document.getElementById('contact-name').textContent = offer.contact;
+      document.getElementById('company-name').textContent = offer.company;
+      document.getElementById('valid-until').textContent = new Date(offer.valid_until).toLocaleDateString('fi-FI');
+      document.getElementById('package-name').textContent = offer.package;
+      document.getElementById('package-desc').textContent = meta.desc || '';
+      document.getElementById('price-monthly').textContent = fmt(offer.monthly_fee);
+      document.getElementById('price-per').textContent = '+ ' + offer.per_meeting + '€ per buukattu tapaaminen';
+      document.getElementById('offer-ref').textContent = offer.id.slice(0,8).toUpperCase();
+      document.getElementById('feat-icp').textContent = meta.icp || '';
+      document.getElementById('feat-meetings').textContent = meta.meetings || '';
+      document.getElementById('feat-am').textContent = meta.am || '';
+
+      const ch = document.getElementById('package-channels');
+      (meta.channels || []).forEach(c => {
+        const pill = document.createElement('span');
+        pill.className = 'channel-pill';
+        pill.textContent = c;
+        ch.appendChild(pill);
+      });
+
+      // Calculator
+      const slider = document.getElementById('meetings-slider');
+      function updateCalc() {
+        const m = parseInt(slider.value);
+        document.getElementById('meetings-val').textContent = m;
+        const meetCost = m * offer.per_meeting;
+        const total = offer.monthly_fee + meetCost;
+        document.getElementById('result-monthly').textContent = fmt(offer.monthly_fee);
+        document.getElementById('result-meetings').textContent = fmt(meetCost);
+        document.getElementById('result-total').textContent = fmt(total);
+      }
+      slider.addEventListener('input', updateCalc);
+      updateCalc();
+
+      // CTA
+      document.getElementById('btn-ask').addEventListener('click', () => {
+        location.href = 'mailto:miika@leadnord.fi?subject=Kysymys tarjouksesta ' + offer.id.slice(0,8).toUpperCase();
+      });
+      document.getElementById('btn-accept').addEventListener('click', async () => {
+        document.getElementById('btn-accept').disabled = true;
+        document.getElementById('btn-accept').textContent = 'Tallennetaan...';
+        await supabase(`/rest/v1/offers?id=eq.${offer.id}`, {
+          method: 'PATCH',
+          headers: { 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ status: 'accepted' })
+        });
+        await logEvent(offer.id, 'accepted');
+        setState('state-success');
+      });
+
+      setState('state-offer');
+      await logEvent(offer.id, 'opened');
+
+    } catch(e) {
+      console.error(e);
+      setState('state-error');
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
